@@ -1,50 +1,91 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import {
+    Database,
+    Brain,
+    Lock,
+    Search,
+} from 'lucide-react';
+import {
+    DiJavascript1,
+    DiPython,
+    DiReact,
+    DiDatabase,
+} from 'react-icons/di';
+import {
+    BiLogoTypescript,
+    BiLogoFirebase,
+} from 'react-icons/bi';
+import { PiOpenAiLogo } from 'react-icons/pi';
+import { SiBmcsoftware } from 'react-icons/si';
 
 const skills = [
-    { name: 'React', level: 90 },
-    { name: 'TypeScript', level: 85 },
-    { name: 'Python', level: 80 },
-    { name: 'Machine Learning', level: 75 },
-    { name: 'Node.js', level: 70 },
-    { name: 'Docker', level: 65 },
+    { name: 'React', level: 90, icon: <DiReact className="w-6 h-6" /> },
+    { name: 'Firebase', level: 100, icon: <BiLogoFirebase className="w-6 h-6" /> },
+    { name: 'TypeScript', level: 75, icon: <BiLogoTypescript className="w-6 h-6" /> },
+    { name: 'Javascript', level: 90, icon: <DiJavascript1 className="w-6 h-6" /> },
+    { name: 'Python', level: 70, icon: <DiPython className="w-6 h-6" /> },
+    { name: 'Prompt Engineering', level: 60, icon: <PiOpenAiLogo className="w-6 h-6" /> },
+    { name: 'SQL', level: 70, icon: <Database className="w-6 h-6" /> },
+    { name: 'Remedy', level: 65, icon: <SiBmcsoftware className="w-6 h-6" /> },
+    { name: 'Neo4j', level: 30, icon: <DiDatabase className="w-6 h-6" /> },
 ];
 
-const About: React.FC = () => {
+const About = () => {
     return (
-        <section id="about" className="py-20 bg-white w-full">
-            <div className="w-full">
+        <section
+            id="about"
+            className="relative py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white overflow-hidden"
+        >
+            {/* Background Pattern */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-[length:40px_40px] bg-grid-white/[0.03] 
+                    [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]">
+                </div>
+            </div>
+
+            {/* Content Container */}
+            <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-12">
+                {/* Header Section */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="text-center max-w-3xl mx-auto"
+                    className="text-center mb-16"
                 >
-                    <h2 className="text-4xl font-bold mb-6 text-gray-800">About Me</h2>
-                    <p className="text-lg text-gray-600 leading-relaxed mb-12">
-                        I'm a passionate full-stack developer with a keen interest in AI and innovative technologies.
-                        My journey involves creating scalable, user-centric solutions that push the boundaries of web development.
-                        I thrive on challenging projects that require creative problem-solving and continuous learning.
+                    <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-gradient">About Me</h2>
+                    <p className="max-w-3xl mx-auto text-lg lg:text-xl text-gray-300">
+                        I am a full-stack developer specializing in modern web development
+                        and AI integration. With expertise in React, TypeScript, and various
+                        databases, I craft scalable and efficient applications. My work
+                        spans creating web platforms, developing Discord bots, and building
+                        AI-driven solutions.
                     </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-                    {/* Skills Section */}
+                {/* Skills and Expertise Container */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    {/* Technical Skills Section */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6 }}
+                        className="bg-gray-900/80 backdrop-blur-lg rounded-xl p-8 shadow-lg"
                     >
-                        <h3 className="text-2xl font-semibold mb-6 text-gray-800">Technical Skills</h3>
+                        <h3 className="text-2xl font-semibold mb-6 flex items-center text-gradient">
+                            <Database className="mr-3 w-8 h-8" /> Technical Skills
+                        </h3>
                         {skills.map((skill, index) => (
-                            <div key={index} className="mb-4">
-                                <div className="flex justify-between mb-2">
-                                    <span className="text-gray-700">{skill.name}</span>
-                                    <span className="text-gray-700">{skill.level}%</span>
+                            <div key={index} className="mb-6">
+                                <div className="flex justify-between items-center mb-2">
+                                    <div className="flex items-center space-x-3">
+                                        {skill.icon}
+                                        <span className="text-white text-lg">{skill.name}</span>
+                                    </div>
+                                    <span className="text-primary font-bold">{skill.level}%</span>
                                 </div>
-                                <div className="w-full bg-gray-200 rounded-full h-2.5">
+                                <div className="relative h-2 bg-gray-700 rounded-full">
                                     <div
-                                        className="bg-primary-500 h-2.5 rounded-full"
+                                        className="absolute top-0 left-0 h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full"
                                         style={{ width: `${skill.level}%` }}
                                     ></div>
                                 </div>
@@ -52,45 +93,56 @@ const About: React.FC = () => {
                         ))}
                     </motion.div>
 
-                    {/* Experience/Philosophy Section */}
+                    {/* Development Philosophy Section */}
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="bg-gray-50 p-6 rounded-xl"
+                        className="bg-gray-900/80 backdrop-blur-lg rounded-xl p-8 shadow-lg"
                     >
-                        <h3 className="text-2xl font-semibold mb-6 text-gray-800">My Approach</h3>
-                        <ul className="space-y-4 text-gray-600">
-                            <li className="flex items-start">
-                                <svg className="w-6 h-6 text-primary-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
-                                <span>Continuous learning and staying ahead of technological trends</span>
-                            </li>
-                            <li className="flex items-start">
-                                <svg className="w-6 h-6 text-primary-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
-                                <span>Focusing on clean, maintainable, and efficient code</span>
-                            </li>
-                            <li className="flex items-start">
-                                <svg className="w-6 h-6 text-primary-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
-                                <span>Collaborative problem-solving and innovative thinking</span>
-                            </li>
+                        <h3 className="text-2xl font-semibold mb-6 flex items-center text-gradient">
+                            <Brain className="mr-3 w-8 h-8" /> Development Philosophy
+                        </h3>
+                        <ul className="space-y-6">
+                            {[
+                                {
+                                    title: "AI Integration Specialist",
+                                    description:
+                                        "Implementing AI solutions through OpenAI and Gemini APIs, focusing on efficiency and practical use cases.",
+                                    icon: <PiOpenAiLogo className="w-6 h-6 text-blue-400" />,
+                                },
+                                {
+                                    title: "Database Architecture",
+                                    description:
+                                        "Experience with SQL, Firebase, and Neo4j, leveraging the right database for the task at hand.",
+                                    icon: <Database className="w-6 h-6 text-green-400" />,
+                                },
+                                {
+                                    title: "Security-First Approach",
+                                    description:
+                                        "Ensuring security best practices in handling sensitive data and API configurations.",
+                                    icon: <Lock className="w-6 h-6 text-red-400" />,
+                                },
+                                {
+                                    title: "Continuous Learning",
+                                    description:
+                                        "Exploring new technologies to stay ahead in modern web development and AI trends.",
+                                    icon: <Search className="w-6 h-6 text-yellow-400" />,
+                                },
+                            ].map((approach, index) => (
+                                <li
+                                    key={index}
+                                    className="flex items-start space-x-4 p-4 bg-gray-800 rounded-lg hover:shadow-lg transition"
+                                >
+                                    <div className="flex-shrink-0">{approach.icon}</div>
+                                    <div>
+                                        <h4 className="text-lg font-semibold text-white">
+                                            {approach.title}
+                                        </h4>
+                                        <p className="text-gray-300">{approach.description}</p>
+                                    </div>
+                                </li>
+                            ))}
                         </ul>
                     </motion.div>
                 </div>
