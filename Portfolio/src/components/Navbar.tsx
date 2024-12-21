@@ -5,7 +5,7 @@ const Navbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const navItems = [
-        { label: 'Home', href: '#hero' },
+        { label: 'Home', href: '#home' },
         { label: 'Projects', href: '#projects' },
         { label: 'About', href: '#about' },
         { label: 'Contact', href: '#contact' }
