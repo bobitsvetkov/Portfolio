@@ -1,110 +1,79 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import {
+    Code,
+    Rocket
+} from 'lucide-react';
+import { ProjectCard } from './ProjectCard';
+import TotalWarWebsiteImage from "../assets/Screenshot 2024-12-21 002032.png"
+import DiscordBotImage from "../assets/6PQtKYb - Imgur.png"
 
-type ProjectCardProps = {
+interface ProjectCardProps {
     title: string;
     description: string;
     technologies: string[];
     demoLink: string;
     githubLink: string;
     image: string;
-};
+}
 
 const projects: ProjectCardProps[] = [
     {
-        title: "AI Chatbot (Mimir)",
-        description: "An advanced conversational AI with personalized interaction capabilities.",
-        technologies: ["React", "TypeScript", "OpenAI", "WebRTC"],
-        demoLink: "#",
-        githubLink: "#",
-        image: "https://via.placeholder.com/400x250",
+        title: "Connectify",
+        description: "Advanced conversational AI with personalized interaction capabilities. Built with state-of-the-art language models and real-time communication.",
+        technologies: ["React", "TypeScript", "OpenAI API", "Agora", "Redux"],
+        demoLink: "https://connectify-telerikproject.vercel.app/",
+        githubLink: "https://github.com/bobitsvetkov/Connectify",
+        image: "https://raw.githubusercontent.com/bobitsvetkov/Connectify/main/Connectify/src/assets/images/Landing1.png",
     },
     {
-        title: "Gaming Community Platform",
-        description: "Comprehensive platform for gamers to connect, compete, and improve.",
-        technologies: ["Next.js", "Tailwind", "Firebase", "GraphQL"],
-        demoLink: "#",
-        githubLink: "#",
-        image: "https://via.placeholder.com/400x250",
+        title: "Total War Community Hub",
+        description: "Comprehensive platform for Total War gamers to connect, compete, and strategize.",
+        technologies: ["React", "Tailwind", "Firebase", "Google Gemini API", "Typescript", "ChakraUI"],
+        demoLink: "https://tw-website.vercel.app/",
+        githubLink: "https://github.com/bobitsvetkov/tw-website",
+        image: TotalWarWebsiteImage,
     },
     {
-        title: "Discord Gamer Assistant",
+        title: "Thracian Noble",
         description: "AI-powered bot providing game stats, recommendations, and community management.",
-        technologies: ["Python", "Discord.py", "Machine Learning"],
-        demoLink: "#",
-        githubLink: "#",
-        image: "https://via.placeholder.com/400x250",
+        technologies: ["Python", "Discord.py", "Prompt Engineering", "OpenAI API", "Firebase"],
+        demoLink: "https://discord.gg/K9GU6VzrmK",
+        githubLink: "https://github.com/bobitsvetkov/Total-War-Bot",
+        image: DiscordBotImage,
     }
 ];
 
-const ProjectCard: React.FC<ProjectCardProps> = ({
-    title,
-    description,
-    technologies,
-    demoLink,
-    githubLink,
-    image
-}) => {
-    return (
-        <motion.div
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-            className="bg-white rounded-xl shadow-card overflow-hidden"
-        >
-            <div className="relative">
-                <img
-                    src={image}
-                    alt={title}
-                    className="w-full h-48 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            </div>
-            <div className="p-6">
-                <h3 className="text-2xl font-bold mb-3 text-gray-800">{title}</h3>
-                <p className="text-gray-600 mb-4">{description}</p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                    {technologies.map((tech, index) => (
-                        <span
-                            key={index}
-                            className="px-2 py-1 bg-primary-100 text-primary-700 rounded-full text-xs"
-                        >
-                            {tech}
-                        </span>
-                    ))}
-                </div>
-
-                <div className="flex space-x-4">
-                    <a
-                        href={demoLink}
-                        className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors"
-                    >
-                        View Demo
-                    </a>
-                    <a
-                        href={githubLink}
-                        className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 transition-colors"
-                    >
-                        GitHub
-                    </a>
-                </div>
-            </div>
-        </motion.div>
-    );
-};
-
 const Projects: React.FC = () => {
     return (
-        <section id="projects" className="py-20 bg-gray-50">
-            <div className="w-full px-4 md:px-8 lg:px-16 max-w-screen-xl mx-auto">
-                <motion.h2
+        <section
+            id="projects"
+            className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden"
+        >
+            {/* Background Grid */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-[length:40px_40px] bg-grid-white/[0.03]
+                    [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]">
+                </div>
+            </div>
+
+            <div className="w-full px-4 md:px-8 lg:px-16 max-w-screen-xl mx-auto relative z-10">
+                <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="text-4xl font-bold text-center mb-12 text-gray-800"
+                    className="text-center mb-16"
                 >
-                    Featured Projects
-                </motion.h2>
+                    <div className="flex items-center justify-center space-x-4 mb-6">
+                        <Rocket className="w-12 h-12 text-primary-400" />
+                        <h2 className="text-5xl font-bold text-white">Featured Projects</h2>
+                        <Code className="w-12 h-12 text-accent-400" />
+                    </div>
+                    <p className="max-w-3xl mx-auto text-xl text-gray-300 leading-relaxed">
+                        A showcase of my technical projects, featuring web applications,
+                        AI integrations, and innovative solutions.
+                    </p>
+                </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projects.map((project, index) => (
