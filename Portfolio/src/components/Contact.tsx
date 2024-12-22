@@ -3,6 +3,7 @@ import { FileText, ExternalLink, Send } from 'lucide-react';
 import { BsGithub, BsLinkedin } from 'react-icons/bs';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
+import cv from '../public/BorislavTsvetkovResume.pdf';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -32,7 +33,7 @@ const Contact = () => {
         {
             icon: <FileText className="w-6 h-6" />,
             label: 'Resume',
-            href: './assets/Borislav_Tsvetkov_Resume.pdf',
+            href: cv,
             color: 'hover:text-green-500'
         }
     ];
