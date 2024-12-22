@@ -5,6 +5,7 @@ import { BsBank } from 'react-icons/bs';
 import { Introduction } from './Introduction';
 import { Timeline } from './Timeline';
 import { Milestone } from '../../types/types';
+import { BsTerminal } from 'react-icons/bs';
 
 const Hero = () => {
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -22,13 +23,13 @@ const Hero = () => {
     const milestones: Milestone[] = [
         { id: 'start-coding', title: 'Start Coding', date: '2022', icon: <Code className="w-6 h-6" />, description: 'Beginning of the journey', isCompleted: true },
         { id: 'first-project', title: 'First Project', date: '2022', icon: <Laptop className="w-6 h-6" />, description: 'Solo project milestone', isCompleted: true },
-        { id: 'bootcamp', title: 'Start Bootcamp', date: '2023', icon: <Users className="w-6 h-6" />, description: 'Learning journey begins', isCompleted: true },
-        { id: 'team-project', title: 'First Team Project', date: '2023', icon: <Users className="w-6 h-6" />, description: 'Collaborative development', isCompleted: true },
-        { id: 'graduate', title: 'Graduate Bootcamp', date: '2023', icon: <GraduationCap className="w-6 h-6" />, description: 'Achievement unlocked', isCompleted: true },
+        { id: 'bootcamp', title: 'Telerik Academy JS Program Start', date: '2023', icon: <BsTerminal className="w-6 h-6" />, description: 'Learning journey begins', isCompleted: true },
+        { id: 'team-project', title: 'Connectify', date: '2023', icon: <Users className="w-6 h-6" />, description: 'Collaborative development', isCompleted: true },
+        { id: 'graduate', title: 'Telerik Academy JS Program End', date: '2023', icon: <GraduationCap className="w-6 h-6" />, description: 'Achievement unlocked', isCompleted: true },
         { id: 'interview', title: 'Grinding Leetcode', date: '2023', icon: <GraduationCap className="w-6 h-6" />, description: 'Achievement unlocked', isCompleted: true },
-        { id: 'work', title: 'Starting work at DSK Bank', date: '2023', icon: <BsBank className="w-6 h-6" />, description: 'Achievement unlocked', isCompleted: true },
-        { id: 'twitch-website', title: 'Twitch Community Website', date: '2024', icon: <FaTwitch className="w-6 h-6" />, description: 'Community platform', isCompleted: true },
-        { id: 'discord-bot', title: 'Discord Bot', date: '2024', icon: <Bot className="w-6 h-6" />, description: 'Automation project', isCompleted: true },
+        { id: 'work', title: 'Start working at DSK Bank', date: '2023', icon: <BsBank className="w-6 h-6" />, description: 'Achievement unlocked', isCompleted: true },
+        { id: 'twitch-website', title: 'Twitch Streamer Community Website', date: '2024', icon: <FaTwitch className="w-6 h-6" />, description: 'Community platform', isCompleted: true },
+        { id: 'discord-bot', title: 'Discord Community AI Bot', date: '2024', icon: <Bot className="w-6 h-6" />, description: 'Automation project', isCompleted: true },
         { id: 'future', title: 'Future Goals', date: '2025+', icon: <Target className="w-6 h-6" />, description: 'Upcoming challenges', isCompleted: false }
     ];
 

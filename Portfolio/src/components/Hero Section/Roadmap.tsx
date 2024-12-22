@@ -23,11 +23,10 @@ const Roadmap = ({
 }: RoadmapProps) => {
     return (
         <div className="relative h-96 mb-20 w-full mt-24">
-            {/* Main line with gradient */}
             <div className="absolute top-1/3 left-0 right-0 h-1 bg-gray-700">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-50" />
 
-                {/* Traveling dot */}
+                {/* Traversing element */}
                 <motion.div
                     className="absolute left-0 -translate-x-1/2 w-4 h-4 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50"
                     initial={{ x: 0 }}
@@ -63,7 +62,7 @@ const Roadmap = ({
                                 }}
                             />
 
-                            {/* Milestone marker */}
+                            {/* Milestone completed check */}
                             <div
                                 className="absolute"
                                 style={{
