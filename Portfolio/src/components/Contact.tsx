@@ -86,7 +86,7 @@ const Contact = () => {
 
                     <div className="grid md:grid-cols-2 gap-12 mb-11">
                         {/* Social Links Section */}
-                        <div className="space-y-8">
+                        <div className="space-y-8 mt-12">
                             <div className="prose prose-invert">
                                 <h3 className="text-2xl font-semibold mb-5">Find Me Online</h3>
                                 <p className="text-gray-400">
