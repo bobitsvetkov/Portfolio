@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileText, ExternalLink, Send } from 'lucide-react';
 import { BsGithub, BsLinkedin } from 'react-icons/bs';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import cv from '../public/BorislavTsvetkovResume.pdf';
+
+declare global {
+    interface Window {
+        grecaptcha: {
+            execute: (siteKey: string, options: { action: string }) => Promise<string>;
+            ready: (callback : () => void) => void;
+        };
+    }
+}
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -12,10 +21,19 @@ const Contact = () => {
         subject: '',
         message: ''
     });
-
     const [isSending, setIsSending] = useState(false);
     const [isSent, setIsSent] = useState(false);
     const [error, setError] = useState('');
+
+    useEffect(() => {
+        const loadRecaptcha = async () => {
+            await window.grecaptcha?.ready(() => {
+                console.log('reCAPTCHA v3 ready');
+            });
+        };
+
+        loadRecaptcha();
+    }, []);
 
     const socialLinks = [
         {
@@ -37,26 +55,43 @@ const Contact = () => {
             color: 'hover:text-green-500'
         }
     ];
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSending(true);
-        emailjs
-            .send(import.meta.env.VITE_EMAIL_JS_SERVICE_KEY || process.env.VITE_EMAIL_JS_SERVICE_KEY,
-                import.meta.env.VITE_EMAIL_JS_TEMPLATE_KEY || process.env.VITE_EMAIL_JS_TEMPLATE_KEY,
-                formData, import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY || process.env.VITE_EMAIL_JS_PUBLIC_KEY)
-            .then(
-                (response) => {
-                    console.log('SUCCESS!', response.status, response.text);
-                    setIsSent(true);
-                    setIsSending(false);
-                    setFormData({ name: '', email: '', subject: '', message: '' });
-                },
-                (error) => {
-                    console.error('FAILED...', error);
-                    setError('Something went wrong. Please try again.');
-                    setIsSending(false);
-                }
+
+        try {
+            const token = await window.grecaptcha.execute(
+                import.meta.env.VITE_RECAPTCHA_SITE_KEY,
+                { action: 'submit' }
             );
+            console.log('Generated reCAPTCHA token:', token);
+
+            const verificationResponse = await fetch('https://bobi-tsvetkov-portfolio.vercel.app//verify-captcha', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token })
+            });
+
+            const verificationResult = await verificationResponse.json();
+
+            if (verificationResult.success) {
+                await emailjs.send(
+                    import.meta.env.VITE_EMAIL_JS_SERVICE_KEY || process.env.VITE_EMAIL_JS_SERVICE_KEY,
+                    import.meta.env.VITE_EMAIL_JS_TEMPLATE_KEY || process.env.VITE_EMAIL_JS_TEMPLATE_KEY,
+                    formData,
+                    import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY || process.env.VITE_EMAIL_JS_PUBLIC_KEY
+                );
+                setIsSent(true);
+                setFormData({ name: '', email: '', subject: '', message: '' });
+            } else {
+                setError('Captcha verification failed');
+            }
+        } catch (error) {
+            setError('Something went wrong. Please try again.');
+            console.error('Error:', error);
+        } finally {
+            setIsSending(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

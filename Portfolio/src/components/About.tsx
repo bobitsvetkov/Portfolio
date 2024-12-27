@@ -19,13 +19,13 @@ import { PiOpenAiLogo } from 'react-icons/pi';
 import { SiBmcsoftware } from 'react-icons/si';
 
 const skills = [
-    { name: 'React', level: 90, icon: <DiReact className="w-6 h-6" /> },
-    { name: 'Firebase', level: 100, icon: <BiLogoFirebase className="w-6 h-6" /> },
-    { name: 'TypeScript', level: 75, icon: <BiLogoTypescript className="w-6 h-6" /> },
-    { name: 'Javascript', level: 90, icon: <DiJavascript1 className="w-6 h-6" /> },
-    { name: 'Python', level: 70, icon: <DiPython className="w-6 h-6" /> },
-    { name: 'Prompt Engineering', level: 60, icon: <PiOpenAiLogo className="w-6 h-6" /> },
-    { name: 'SQL', level: 70, icon: <Database className="w-6 h-6" /> },
+    { name: 'React', level: 55, icon: <DiReact className="w-6 h-6" /> },
+    { name: 'Firebase', level: 50, icon: <BiLogoFirebase className="w-6 h-6" /> },
+    { name: 'TypeScript', level: 60, icon: <BiLogoTypescript className="w-6 h-6" /> },
+    { name: 'Javascript', level: 70, icon: <DiJavascript1 className="w-6 h-6" /> },
+    { name: 'Python', level: 40, icon: <DiPython className="w-6 h-6" /> },
+    { name: 'Prompt Engineering', level: 40, icon: <PiOpenAiLogo className="w-6 h-6" /> },
+    { name: 'SQL', level: 60, icon: <Database className="w-6 h-6" /> },
     { name: 'Remedy', level: 65, icon: <SiBmcsoftware className="w-6 h-6" /> },
     { name: 'Neo4j', level: 30, icon: <DiDatabase className="w-6 h-6" /> },
 ];
