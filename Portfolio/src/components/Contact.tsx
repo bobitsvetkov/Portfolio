@@ -66,7 +66,7 @@ const Contact = () => {
             );
             console.log('Generated reCAPTCHA token:', token);
 
-            const verificationResponse = await fetch('https://bobi-tsvetkov-portfolio.vercel.app//verify-captcha', {
+            const verificationResponse = await fetch('https://bobi-tsvetkov-portfolio.vercel.app/verify-captcha', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ token })
