@@ -60,6 +60,11 @@ const Contact = () => {
         setIsSending(true);
 
         try {
+
+            if (typeof window.grecaptcha === 'undefined') {
+                setError('reCAPTCHA is not loaded yet.');
+                return;
+            }
             const token = await window.grecaptcha.execute(
                 import.meta.env.VITE_RECAPTCHA_SITE_KEY || process.env.VITE_RECAPTCHA_SITE_KEY,
                 { action: 'submit' }
