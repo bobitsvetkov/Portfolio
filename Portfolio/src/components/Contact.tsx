@@ -66,11 +66,11 @@ const Contact = () => {
                 return;
             }
             const token = await window.grecaptcha.execute(
-                import.meta.env.VITE_RECAPTCHA_SITE_KEY || process.env.VITE_RECAPTCHA_SITE_KEY,
+                import.meta.env.VITE_RECAPTCHA_SITE_KEY || process.env.RECAPTCHA_SITE_KEY,
                 { action: 'submit' }
             );
 
-            const verificationResponse = await fetch('https://bobi-tsvetkov-portfolio.vercel.app/verify-captcha', {
+            const verificationResponse = await fetch('https://bobitsvetkov.github.io/Portfolio/verify-captcha', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ token })
@@ -80,10 +80,10 @@ const Contact = () => {
 
             if (verificationResult.success) {
                 await emailjs.send(
-                    import.meta.env.VITE_EMAIL_JS_SERVICE_KEY || process.env.VITE_EMAIL_JS_SERVICE_KEY,
-                    import.meta.env.VITE_EMAIL_JS_TEMPLATE_KEY || process.env.VITE_EMAIL_JS_TEMPLATE_KEY,
+                    import.meta.env.VITE_EMAIL_JS_SERVICE_KEY || process.env.EMAIL_JS_SERVICE_KEY,
+                    import.meta.env.VITE_EMAIL_JS_TEMPLATE_KEY || process.env.EMAIL_JS_TEMPLATE_KEY,
                     formData,
-                    import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY || process.env.VITE_EMAIL_JS_PUBLIC_KEY
+                    import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY || process.env.EMAIL_JS_PUBLIC_KEY
                 );
                 setIsSent(true);
                 setFormData({ name: '', email: '', subject: '', message: '' });

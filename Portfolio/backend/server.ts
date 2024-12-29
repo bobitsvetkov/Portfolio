@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
@@ -12,18 +12,37 @@ interface CaptchaResponse {
 }
 
 const app = express();
+
 app.use(cors({
-    origin: 'https://bobi-tsvetkov-portfolio.vercel.app',
+    origin: [
+        'https://bobitsvetkov.github.io',
+        'http://localhost:5173',
+        'http://localhost:3000'
+    ],
+    credentials: true,
     methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(express.json());
 
-app.post('/verify-captcha', async (req, res) => {
+// Health check endpoint
+app.get('/health', (_req: Request, res: Response) => {
+    res.json({ status: 'healthy' });
+});
+
+app.post('/verify-captcha', async (req: Request, res: Response) => {
     console.log('Received request with body:', req.body);
     const { token } = req.body;
+
     if (!token) {
         console.log('No token provided');
         return res.status(400).json({ success: false, message: 'No token provided' });
+    }
+
+    if (!process.env.RECAPTCHA_SECRET_KEY) {
+        console.error('RECAPTCHA_SECRET_KEY not configured');
+        return res.status(500).json({ success: false, message: 'Server configuration error' });
     }
 
     try {
@@ -34,26 +53,44 @@ app.post('/verify-captcha', async (req, res) => {
         });
 
         if (!response.ok) {
-            return res.status(500).json({ success: false, message: 'reCAPTCHA verification failed on Google\'s side' });
+            console.error('Google reCAPTCHA API error:', response.status, response.statusText);
+            return res.status(500).json({
+                success: false,
+                message: 'reCAPTCHA verification failed on Google\'s side'
+            });
         }
 
-        try {
-            const data = await response.json() as CaptchaResponse;
+        const data = await response.json() as CaptchaResponse;
+        console.log('reCAPTCHA verification response:', data);
 
-            if (data.success && data.score && data.score >= 0.5) {
-                return res.json({ success: true, score: data.score });
-            } else {
-                return res.json({ success: false, message: 'Captcha verification failed' });
-            }
-        } catch (jsonError) {
-            console.error('JSON parsing error:', jsonError);
-            return res.status(500).json({ success: false, message: 'Error parsing reCAPTCHA response' });
+        if (data.success && data.score && data.score >= 0.5) {
+            return res.json({ success: true, score: data.score });
+        } else {
+            console.log('Captcha verification failed:', data['error-codes']);
+            return res.json({
+                success: false,
+                message: 'Captcha verification failed',
+                errors: data['error-codes']
+            });
         }
-    } catch (fetchError) {
-        console.error('Fetch error:', fetchError);
-        return res.status(500).json({ success: false, message: 'Error contacting reCAPTCHA service' });
+    } catch (error) {
+        console.error('Server error:', error);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error during reCAPTCHA verification'
+        });
     }
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    console.error('Unhandled error:', err);
+    res.status(500).json({
+        success: false,
+        message: 'An unexpected error occurred'
+    });
+});
