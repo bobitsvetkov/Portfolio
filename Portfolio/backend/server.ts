@@ -3,19 +3,13 @@ import cors from 'cors';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 
+dotenv.config();
+
 interface CaptchaResponse {
     success: boolean;
     score?: number;
     'error-codes'?: string[];
 }
-
-interface VerifyRequest extends Request {
-    body: {
-        token: string;
-    }
-}
-
-dotenv.config();
 
 const app = express();
 app.use(cors({
@@ -24,8 +18,13 @@ app.use(cors({
 }));
 app.use(express.json());
 
-app.post('/verify-captcha', async (req: VerifyRequest, res: Response) => {
+app.post('/verify-captcha', async (req, res) => {
+    console.log('Received request with body:', req.body);
     const { token } = req.body;
+    if (!token) {
+        console.log('No token provided');
+        return res.status(400).json({ success: false, message: 'No token provided' });
+    }
 
     try {
         const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
@@ -34,16 +33,25 @@ app.post('/verify-captcha', async (req: VerifyRequest, res: Response) => {
             body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`
         });
 
-        const data = await response.json() as CaptchaResponse;
-
-        if (data.success && data.score && data.score >= 0.5) {
-            res.json({ success: true, score: data.score });
-        } else {
-            res.json({ success: false, message: 'Captcha verification failed' });
+        if (!response.ok) {
+            return res.status(500).json({ success: false, message: 'reCAPTCHA verification failed on Google\'s side' });
         }
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
-        res.status(500).json({ success: false, message: 'Server error' });
+
+        try {
+            const data = await response.json() as CaptchaResponse;
+
+            if (data.success && data.score && data.score >= 0.5) {
+                return res.json({ success: true, score: data.score });
+            } else {
+                return res.json({ success: false, message: 'Captcha verification failed' });
+            }
+        } catch (jsonError) {
+            console.error('JSON parsing error:', jsonError);
+            return res.status(500).json({ success: false, message: 'Error parsing reCAPTCHA response' });
+        }
+    } catch (fetchError) {
+        console.error('Fetch error:', fetchError);
+        return res.status(500).json({ success: false, message: 'Error contacting reCAPTCHA service' });
     }
 });
 
