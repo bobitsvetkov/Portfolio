@@ -29,16 +29,15 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
+          cache-dependency-path: './Portfolio/package-lock.json'
 
       - name: Install dependencies
-        run: |
-          cd Portfolio
-          npm install
+        working-directory: ./Portfolio
+        run: npm install
 
       - name: Build
-        run: |
-          cd Portfolio
-          npm run build
+        working-directory: ./Portfolio
+        run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
