@@ -70,7 +70,7 @@ const Contact = () => {
                 { action: 'submit' }
             );
 
-            const verificationResponse = await fetch('https://bobitsvetkov.github.io/Portfolio/verify-captcha', {
+            const verificationResponse = await fetch('https://portfolio-website-backend.up.railway.app/verify-captcha', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ token })

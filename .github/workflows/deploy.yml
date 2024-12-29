@@ -36,12 +36,12 @@ jobs:
         run: npm install
 
       - name: Build
-       env:
-          EMAIL_JS_PUBLIC_KEY: ${{ secrets.EMAIL_JS_PUBLIC_KEY }}
-          EMAIL_JS_SERVICE_KEY: ${{ secrets.EMAIL_JS_SERVICE_KEY }}
-          EMAIL_JS_TEMPLATE_KEY: ${{ secrets.EMAIL_JS_TEMPLATE_KEY }}
-          RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
-          RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+        env:
+          VITE_EMAIL_JS_PUBLIC_KEY: ${{ secrets.EMAIL_JS_PUBLIC_KEY }}
+          VITE_EMAIL_JS_SERVICE_KEY: ${{ secrets.EMAIL_JS_SERVICE_KEY }}
+          VITE_EMAIL_JS_TEMPLATE_KEY: ${{ secrets.EMAIL_JS_TEMPLATE_KEY }}
+          VITE_RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+          VITE_RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
         working-directory: ./Portfolio
         run: npm run build
 
