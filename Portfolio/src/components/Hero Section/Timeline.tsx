@@ -10,7 +10,7 @@ interface TimelineProps {
 }
 
 export const Timeline = ({ milestones, completedMilestones, futureGoalPosition, lineRef }: TimelineProps) => (
-    <div className="relative h-96 mb-20 w-full mt-24">
+    <div className="relative mb-20 mt-24 w-full h-96">
         <div ref={lineRef} className="absolute top-1/3 left-0 right-0 h-1 bg-gray-700">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-50" />
 
@@ -31,22 +31,24 @@ export const Timeline = ({ milestones, completedMilestones, futureGoalPosition, 
                 }}
             />
 
-            {milestones.map((milestone, index) => {
-                const totalMilestones = milestones.length - 1;
-                const position = `${(index / totalMilestones) * 100}%`;
-                const isEven = index % 2 === 0;
+            <div className="timeline-milestones">
+                {milestones.map((milestone, index) => {
+                    const totalMilestones = milestones.length - 1;
+                    const position = `${(index / totalMilestones) * 100}%`;
+                    const isEven = index % 2 === 0;
 
-                return (
-                    <MilestoneMarker
-                        key={milestone.id}
-                        milestone={milestone}
-                        position={position}
-                        index={index}
-                        isEven={isEven}
-                        isCompleted={completedMilestones.includes(index)}
-                    />
-                );
-            })}
+                    return (
+                        <MilestoneMarker
+                            key={milestone.id}
+                            milestone={milestone}
+                            position={position}
+                            index={index}
+                            isEven={isEven}
+                            isCompleted={completedMilestones.includes(index)}
+                        />
+                    );
+                })}
+            </div>
         </div>
     </div>
 );

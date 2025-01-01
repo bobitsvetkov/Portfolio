@@ -63,7 +63,7 @@ const Hero = () => {
     const futureGoalPosition = (futureGoalIndex / (milestones.length - 1)) * lineWidth;
 
     return (
-        <section className="relative w-full min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white flex flex-col">
+        <section className="relative w-full min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white flex flex-col overflow-x-hidden">
             <div className="flex-1 container mx-auto px-4 pt-20 flex flex-col">
                 <Introduction
                     name="Borislav"
