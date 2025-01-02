@@ -1,54 +1,187 @@
-import { motion } from 'framer-motion';
-import { MilestoneMarker } from './MilestoneMarker';
-import { Milestone } from '../../types/types';
+import { useState, useEffect, useRef } from 'react';
+import { Command, HelpCircle, Code, Briefcase, GraduationCap } from 'lucide-react';
 
-interface TimelineProps {
-    milestones: Milestone[];
-    completedMilestones: number[];
-    futureGoalPosition: number;
-    lineRef: React.RefObject<HTMLDivElement>;
-}
+const COMMANDS = {
+    help: {
+        desc: 'Display available commands',
+        icon: <HelpCircle className="w-4 h-4" />
+    },
+    skills: {
+        desc: 'Show tech stack and skills',
+        icon: <Code className="w-4 h-4" />
+    },
+    projects: {
+        desc: 'List all projects',
+        icon: <Briefcase className="w-4 h-4" />
+    },
+    contact: {
+        desc: 'Show contact information',
+        icon: <GraduationCap className="w-4 h-4" />
+    },
+    clear: {
+        desc: 'Clear terminal',
+        icon: <Command className="w-4 h-4" />
+    }
+};
 
-export const Timeline = ({ milestones, completedMilestones, futureGoalPosition, lineRef }: TimelineProps) => (
-    <div className="relative mb-20 mt-24 w-full h-96">
-        <div ref={lineRef} className="absolute top-1/3 left-0 right-0 h-1 bg-gray-700">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-50" />
+const Timeline = () => {
+    interface HistoryEntry {
+        type: string;
+        content: JSX.Element;
+    }
+    const [history, setHistory] = useState<HistoryEntry[]>([]);
+    const [currentInput, setCurrentInput] = useState('');
+    const terminalEndRef = useRef(null);
+    const terminalContentRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
-            <motion.div
-                className="absolute left-0 -translate-x-1/2 w-4 h-4 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50"
-                initial={{ x: 0 }}
-                animate={{
-                    x: futureGoalPosition,
-                    scale: [1, 1.2, 1],
-                    backgroundColor: ["#3B82F6", "#A855F7"],
-                }}
-                transition={{
-                    duration: 5,
-                    ease: "linear",
-                }}
-                style={{
-                    top: '50%',
-                }}
-            />
+    useEffect(() => {
+        setHistory([{
+            type: 'system',
+            content: (
+                <div className="text-green-400">
+                    Welcome to my Portfolio Website! Type help to get started!
+                </div>
+            )
+        }]);
+    }, []);
 
-            <div className="timeline-milestones">
-                {milestones.map((milestone, index) => {
-                    const totalMilestones = milestones.length - 1;
-                    const position = `${(index / totalMilestones) * 100}%`;
-                    const isEven = index % 2 === 0;
+    // Ensure input is always focused
+    const focusInput = () => {
+        inputRef.current?.focus();
+    };
 
-                    return (
-                        <MilestoneMarker
-                            key={milestone.id}
-                            milestone={milestone}
-                            position={position}
-                            index={index}
-                            isEven={isEven}
-                            isCompleted={completedMilestones.includes(index)}
+    useEffect(() => {
+        // Add click event listener to the terminal content box
+        const terminalContent = terminalContentRef.current;
+        if (terminalContent) {
+            terminalContent.addEventListener('click', focusInput);
+        }
+
+        // Clean up the event listener when the component is unmounted
+        return () => {
+            if (terminalContent) {
+                terminalContent.removeEventListener('click', focusInput);
+            }
+        };
+    }, []);
+
+    const executeCommand = (cmd: string) => {
+        const commandInput = cmd.toLowerCase().trim();
+
+        addToHistory({
+            type: 'command',
+            content: <div>{`$ ${cmd}`}</div>
+        });
+
+        switch (commandInput) {
+            case 'help':
+                addToHistory({
+                    type: 'output',
+                    content: (
+                        <div className="mt-2">
+                            <p className="text-green-400 mb-2">Available commands:</p>
+                            {Object.entries(COMMANDS).map(([cmd, info]) => (
+                                <div key={cmd} className="flex items-center space-x-2 mb-1">
+                                    <span className="text-blue-400">{info.icon}</span>
+                                    <span className="text-yellow-400">{cmd}</span>
+                                    <span className="text-gray-400">- {info.desc}</span>
+                                </div>
+                            ))}
+                        </div>
+                    )
+                });
+                break;
+
+            case 'skills':
+                // Scroll to the "skills" section
+                document.getElementById("about")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                break;
+
+            case 'projects':
+                // Scroll to the "projects" section
+                document.getElementById("projects")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                break;
+
+            case 'contact':
+                // Scroll to the "education" section
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                break;
+
+            case 'clear':
+                setHistory([{
+                    type: 'system',
+                    content: (
+                        <div className="text-green-400">
+                            Terminal cleared. Type 'help' to see available commands.
+                        </div>
+                    )
+                }]);
+                break;
+
+            default:
+                addToHistory({
+                    type: 'error',
+                    content: (
+                        <div className="text-red-400">
+                            Command not recognized: '{cmd}'. Type 'help' to see available commands.
+                        </div>
+                    )
+                });
+        }
+    };
+
+    const addToHistory = (entry: HistoryEntry) => {
+        setHistory(prev => [...prev, entry]);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && currentInput.trim() !== '') {
+            executeCommand(currentInput);
+            setCurrentInput('');
+            e.preventDefault(); // Prevent default enter behavior
+        }
+    };
+
+    return (
+        <div className="w-full max-w-4xl mx-auto p-4">
+            <div className="bg-gray-900 rounded-lg shadow-xl border border-gray-700">
+                <div className="flex items-center px-4 py-2 bg-gray-800 rounded-t-lg border-b border-gray-700">
+                    <div className="flex space-x-2">
+                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div className="flex-1 text-center text-gray-400 text-sm font-mono">
+                        developer_journey.sh
+                    </div>
+                </div>
+
+                <div ref={terminalContentRef} className="p-4 font-mono h-[400px] overflow-y-auto" onClick={focusInput}>
+                    {history.map((entry, index) => (
+                        <div key={index} className="mb-2">
+                            {entry.content}
+                        </div>
+                    ))}
+
+                    <div className="flex items-center space-x-2">
+                        <span className="text-blue-400">$</span>
+                        <input
+                            ref={inputRef} // Assign ref to the input field
+                            type="text"
+                            value={currentInput}
+                            onChange={(e) => setCurrentInput(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                            className="flex-1 bg-transparent text-white outline-none"
+                            spellCheck="false"
+                            autoFocus
                         />
-                    );
-                })}
+                    </div>
+                    <div ref={terminalEndRef} />
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
+};
+
+export default Timeline;
