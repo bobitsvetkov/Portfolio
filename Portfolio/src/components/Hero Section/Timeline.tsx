@@ -52,13 +52,11 @@ const Timeline = () => {
     };
 
     useEffect(() => {
-        // Add click event listener to the terminal content box
         const terminalContent = terminalContentRef.current;
         if (terminalContent) {
             terminalContent.addEventListener('click', focusInput);
         }
 
-        // Clean up the event listener when the component is unmounted
         return () => {
             if (terminalContent) {
                 terminalContent.removeEventListener('click', focusInput);
@@ -94,17 +92,14 @@ const Timeline = () => {
                 break;
 
             case 'skills':
-                // Scroll to the "skills" section
                 document.getElementById("about")?.scrollIntoView({ behavior: "smooth", block: "start" });
                 break;
 
             case 'projects':
-                // Scroll to the "projects" section
                 document.getElementById("projects")?.scrollIntoView({ behavior: "smooth", block: "start" });
                 break;
 
             case 'contact':
-                // Scroll to the "education" section
                 document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
                 break;
 
@@ -139,7 +134,7 @@ const Timeline = () => {
         if (e.key === 'Enter' && currentInput.trim() !== '') {
             executeCommand(currentInput);
             setCurrentInput('');
-            e.preventDefault(); // Prevent default enter behavior
+            e.preventDefault();
         }
     };
 
@@ -167,7 +162,7 @@ const Timeline = () => {
                     <div className="flex items-center space-x-2">
                         <span className="text-blue-400">$</span>
                         <input
-                            ref={inputRef} // Assign ref to the input field
+                            ref={inputRef}
                             type="text"
                             value={currentInput}
                             onChange={(e) => setCurrentInput(e.target.value)}

@@ -70,7 +70,7 @@ const Contact = () => {
                 { action: 'submit' }
             );
 
-            const verificationResponse = await fetch('https://portfolio-website-backend.up.railway.app/verify-captcha', {
+            const verificationResponse = await fetch('https://portfolio-backend-server.azurewebsites.net/verify-captcha', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ token })
@@ -107,7 +107,6 @@ const Contact = () => {
 
     return (
         <footer id="contact" className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white pt-16 pb-8">
-            {/* Background Accent */}
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 pointer-events-none" />
 
             <div className="w-screen max-w-screen px-4 md:px-8 lg:px-16">

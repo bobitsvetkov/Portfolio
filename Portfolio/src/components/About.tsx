@@ -3,7 +3,6 @@ import {
     Database,
     Brain,
     Lock,
-    Search,
 } from 'lucide-react';
 import {
     DiJavascript1,
@@ -17,6 +16,7 @@ import {
 } from 'react-icons/bi';
 import { PiOpenAiLogo } from 'react-icons/pi';
 import { SiBmcsoftware } from 'react-icons/si';
+import { GiProgression } from 'react-icons/gi';
 
 const skills = [
     { name: 'React', level: 55, icon: <DiReact className="w-6 h-6" /> },
@@ -54,11 +54,13 @@ const About = () => {
                 >
                     <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-gradient">About Me</h2>
                     <p className="max-w-3xl mx-auto text-lg lg:text-xl text-gray-300">
-                        I am a full-stack developer specializing in modern web development
-                        and AI integration. With expertise in React, TypeScript, and various
-                        databases, I craft scalable and efficient applications. My work
-                        spans creating web platforms, developing Discord bots, and building
-                        AI-driven solutions.
+                        I am a full-stack developer specializing in web development.
+                        Recently I started exploring backend development
+                        and learning how to create my own servers, rather than relying on platforms, such as
+                        Firebase or Vercel, which made me too focused on frontend.
+                        I am always eager to learn new tools and keep growing as a developer.
+                        Currently my goal is to become a more well-rounded developer by learning how to further
+                        optimize my applications and incorporate AI in interesting and creative ways.
                     </p>
                 </motion.div>
 
@@ -106,28 +108,22 @@ const About = () => {
                         <ul className="space-y-6">
                             {[
                                 {
-                                    title: "AI Integration Specialist",
+                                    title: "AI Integration",
                                     description:
-                                        "Implementing AI solutions through OpenAI and Gemini APIs, focusing on efficiency and practical use cases.",
+                                        "I leverage AI tools like OpenAI and Gemini to create interesting and creative solutions that enhance the user experience. One such solution was creating a faction analysis tool, so that players could see which faction suits their playstyle",
                                     icon: <PiOpenAiLogo className="w-6 h-6 text-blue-400" />,
                                 },
                                 {
-                                    title: "Database Architecture",
+                                    title: "Focus on Security",
                                     description:
-                                        "Experience with SQL, Firebase, and Neo4j, leveraging the right database for the task at hand.",
-                                    icon: <Database className="w-6 h-6 text-green-400" />,
-                                },
-                                {
-                                    title: "Security-First Approach",
-                                    description:
-                                        "Ensuring security best practices in handling sensitive data and API configurations.",
-                                    icon: <Lock className="w-6 h-6 text-red-400" />,
+                                        "As a frontend developer, I previously overlooked security, even leaving API keys exposed in my code. However, after one of my projects was breached, I began prioritizing security and data protection.This includes adding captchas to forms and securely storing sensitive data on my backend instead of exposing it to the client.I am now committed to fixing past mistakes and enhancing the security of my applications.",
+                                    icon: <Lock className="w-6 h-6 text-green-400" />,
                                 },
                                 {
                                     title: "Continuous Learning",
                                     description:
-                                        "Exploring new technologies to stay ahead in modern web development and AI trends.",
-                                    icon: <Search className="w-6 h-6 text-yellow-400" />,
+                                        "I strive to stay ahead of the curve by continuously exploring new tools and technologies. Every project is an opportunity for growth, whether it's diving deeper into the backend or optimizing existing workflows.",
+                                    icon: <GiProgression className="w-6 h-6 text-red-400" />,
                                 },
                             ].map((approach, index) => (
                                 <li
