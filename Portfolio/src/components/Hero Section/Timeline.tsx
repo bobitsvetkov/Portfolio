@@ -148,7 +148,7 @@ const Timeline = () => {
                         <div className="w-3 h-3 rounded-full bg-green-500"></div>
                     </div>
                     <div className="flex-1 text-center text-gray-400 text-sm font-mono">
-                        developer_journey.sh
+                        route_terminal.sh
                     </div>
                 </div>
 
