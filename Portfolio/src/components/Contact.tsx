@@ -65,7 +65,6 @@ const Contact = () => {
                 setError('reCAPTCHA is not loaded yet.');
                 return;
             }
-            console.log("RECAPTCHA_SITE_KEY = ", import.meta.env.VITE_RECAPTCHA_SITE_KEY || process.env.RECAPTCHA_SITE_KEY);
             const token = await window.grecaptcha.execute(
                 import.meta.env.VITE_RECAPTCHA_SITE_KEY || process.env.RECAPTCHA_SITE_KEY,
                 { action: 'submit' }

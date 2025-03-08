@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import {
     ExternalLink,
-    GitBranchIcon,
 } from 'lucide-react';
+import { BsGithub } from 'react-icons/bs';
 interface ProjectCardProps {
     title: string;
     description: string;
@@ -55,7 +55,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                             className="text-white hover:text-primary-400 transition-colors p-2 hover:bg-gray-700 rounded-full"
                             title="GitHub Repository"
                         >
-                            <GitBranchIcon className="w-5 h-5" />
+                            <BsGithub className="w-5 h-5" />
                         </a>
                     </div>
                 </div>
