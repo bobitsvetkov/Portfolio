@@ -7,15 +7,7 @@ import {
 import { ProjectCard } from './ProjectCard';
 import TotalWarWebsiteImage from "../assets/Screenshot 2024-12-21 002032.png"
 import DiscordBotImage from "../assets/6PQtKYb - Imgur.png"
-
-interface ProjectCardProps {
-    title: string;
-    description: string;
-    technologies: string[];
-    demoLink: string;
-    githubLink: string;
-    image: string;
-}
+import { ProjectCardProps } from '../types/types';
 
 const projects: ProjectCardProps[] = [
     {

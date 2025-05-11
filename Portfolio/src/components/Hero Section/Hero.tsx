@@ -1,6 +1,6 @@
 import { useEffect, useState} from 'react';
 import { Introduction } from './Introduction';
-import Timeline from './Timeline';
+import Terminal from './Terminal/Terminal';
 
 const Hero = () => {
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -27,7 +27,7 @@ const Hero = () => {
                     currentWordIndex={currentWordIndex}
                     introduction={introduction}
                 />
-                <Timeline
+                <Terminal
                 />
             </div>
         </section>
