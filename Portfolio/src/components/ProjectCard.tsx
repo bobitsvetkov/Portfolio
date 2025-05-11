@@ -4,14 +4,7 @@ import {
     ExternalLink,
 } from 'lucide-react';
 import { BsGithub } from 'react-icons/bs';
-interface ProjectCardProps {
-    title: string;
-    description: string;
-    technologies: string[];
-    demoLink: string;
-    githubLink: string;
-    image: string;
-}
+import { ProjectCardProps } from '../types/types';
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
     title,

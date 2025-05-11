@@ -7,3 +7,17 @@ export interface Milestone {
     description: string;
     isCompleted: boolean;
 }
+
+export interface ProjectCardProps {
+    title: string;
+    description: string;
+    technologies: string[];
+    demoLink: string;
+    githubLink: string;
+    image: string;
+}
+export interface IntroductionProps {
+    name: string;
+    currentWordIndex: number;
+    introduction: string[];
+}
