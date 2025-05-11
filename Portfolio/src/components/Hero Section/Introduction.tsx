@@ -1,10 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-
-interface IntroductionProps {
-    name: string;
-    currentWordIndex: number;
-    introduction: string[];
-}
+import { IntroductionProps } from '../../types/types';
 
 export const Introduction = ({ name, currentWordIndex, introduction }: IntroductionProps) => (
     <div className="text-center mb-8">

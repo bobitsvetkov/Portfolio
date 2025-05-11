@@ -20,7 +20,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             transition={{ duration: 0.2 }}
             className="h-full bg-gray-900 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 group flex flex-col"
         >
-            {/* Project Image with Overlay */}
             <div className="relative">
                 <img
                     src={image}
@@ -31,7 +30,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 </div>
             </div>
 
-            {/* Project Details */}
             <div className="p-6 bg-gray-800 flex-grow flex flex-col">
                 <div className="flex justify-between items-start mb-4">
                     <h3 className="text-2xl font-bold text-white flex-grow">{title}</h3>
@@ -55,7 +53,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
                 <p className="text-gray-300 mb-6 flex-grow">{description}</p>
 
-                {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mt-auto">
                     {technologies.map((tech, index) => (
                         <span

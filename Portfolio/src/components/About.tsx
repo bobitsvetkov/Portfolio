@@ -36,16 +36,13 @@ const About = () => {
             id="about"
             className="relative py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white overflow-hidden"
         >
-            {/* Background Pattern */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute inset-0 bg-[length:40px_40px] bg-grid-white/[0.03] 
                     [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]">
                 </div>
             </div>
 
-            {/* Content Container */}
             <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-12">
-                {/* Header Section */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -64,9 +61,7 @@ const About = () => {
                     </p>
                 </motion.div>
 
-                {/* Skills and Expertise Container */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    {/* Technical Skills Section */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -95,7 +90,6 @@ const About = () => {
                         ))}
                     </motion.div>
 
-                    {/* Development Philosophy Section */}
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}

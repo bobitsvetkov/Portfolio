@@ -38,7 +38,6 @@ export const commandHandlers: Record<string, CommandHandler> = {
   }
 };
 
-// Process a user command
 export const processCommand = (
   cmd: string,
   addToHistory: (entry: HistoryEntry) => void,

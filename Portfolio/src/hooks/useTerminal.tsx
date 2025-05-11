@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { HistoryEntry } from '../components/Hero Section/Terminal/Commands';
-import { processCommand } from '../components/Hero Section/Terminal/commandHandler';
+import { processCommand } from '../components/Hero Section/Terminal/CommandHandler';
 
 export const useTerminal = () => {
   const [history, setHistory] = useState<HistoryEntry[]>([]);
@@ -9,7 +9,6 @@ export const useTerminal = () => {
   const terminalContentRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Initialize with welcome message
   useEffect(() => {
     setHistory([{
       type: 'system',
@@ -21,7 +20,6 @@ export const useTerminal = () => {
     }]);
   }, []);
 
-  // Focus management
   const focusInput = () => {
     inputRef.current?.focus();
   };
@@ -36,7 +34,6 @@ export const useTerminal = () => {
     }
   }, []);
 
-  // History management
   const addToHistory = (entry: HistoryEntry) => {
     setHistory(prev => [...prev, entry]);
   };
@@ -52,7 +49,6 @@ export const useTerminal = () => {
     }]);
   };
 
-  // Input handling
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && currentInput.trim() !== '') {
       processCommand(currentInput, addToHistory, clearTerminal);
