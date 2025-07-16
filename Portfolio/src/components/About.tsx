@@ -71,8 +71,8 @@ const About = () => {
                         <h3 className="text-2xl font-semibold mb-6 flex items-center text-gradient">
                             <Database className="mr-3 w-8 h-8" /> Technical Skills
                         </h3>
-                        {skills.map((skill, index) => (
-                            <div key={index} className="mb-6">
+                        {skills.map((skill) => (
+                            <div key={skill.name} className="mb-6">
                                 <div className="flex justify-between items-center mb-2">
                                     <div className="flex items-center space-x-3">
                                         {skill.icon}
@@ -119,9 +119,9 @@ const About = () => {
                                         "I strive to stay ahead of the curve by continuously exploring new tools and technologies. Every project is an opportunity for growth, whether it's diving deeper into the backend or optimizing existing workflows.",
                                     icon: <GiProgression className="w-6 h-6 text-red-400" />,
                                 },
-                            ].map((approach, index) => (
+                            ].map((approach) => (
                                 <li
-                                    key={index}
+                                    key={approach.title}
                                     className="flex items-start space-x-4 p-4 bg-gray-800 rounded-lg hover:shadow-lg transition"
                                 >
                                     <div className="flex-shrink-0">{approach.icon}</div>

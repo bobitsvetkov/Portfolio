@@ -68,12 +68,12 @@ const Projects: React.FC = () => {
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project, index) => (
+                    {projects.map((project) => (
                         <motion.div
-                            key={index}
+                            key={project.title}
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: index * 0.2 }}
+                            transition={{ duration: 0.6, delay: projects.indexOf(project) * 0.2 }}
                         >
                             <ProjectCard {...project} />
                         </motion.div>

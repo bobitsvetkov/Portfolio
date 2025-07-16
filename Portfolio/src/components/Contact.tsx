@@ -26,14 +26,13 @@ const Contact = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        const loadRecaptcha = async () => {
-            await window.grecaptcha?.ready(() => {
-                console.log('reCAPTCHA v3 ready');
-            });
-        };
-
-        loadRecaptcha();
-    }, []);
+    const loadRecaptcha = () => {
+        window.grecaptcha?.ready(() => {
+            console.log('reCAPTCHA v3 ready');
+        });
+    };
+    loadRecaptcha();
+}, []);
 
     const socialLinks = [
         {

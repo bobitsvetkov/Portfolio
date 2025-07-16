@@ -17,19 +17,22 @@ export const Introduction = ({ name, currentWordIndex, introduction }: Introduct
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             >
-                {name.split('').map((letter, index) => (
-                    <motion.span
-                        key={index}
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                            delay: index * 0.05,
-                            duration: 0.3,
-                        }}
-                    >
-                        {letter}
-                    </motion.span>
-                ))}
+                {name.split('').map((letter, index) => {
+                    const uniqueKey = `${name}-letter-${index}`;
+                    return (
+                        <motion.span
+                            key={uniqueKey}
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{
+                                delay: index * 0.05,
+                                duration: 0.3,
+                            }}
+                        >
+                            {letter}
+                        </motion.span>
+                    );
+                })}
             </motion.span>
         </motion.h1>
 

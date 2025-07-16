@@ -54,9 +54,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 <p className="text-gray-300 mb-6 flex-grow">{description}</p>
 
                 <div className="flex flex-wrap gap-2 mt-auto">
-                    {technologies.map((tech, index) => (
+                    {technologies.map((tech) => (
                         <span
-                            key={index}
+                            key={tech}
                             className="px-3 bg-gray-700 text-white rounded-full text-xs font-medium hover:bg-gray-600 transition-colors"
                         >
                             {tech}
