@@ -7,6 +7,9 @@ import {
 import { ProjectCard } from './ProjectCard';
 import TotalWarWebsiteImage from "../assets/Screenshot 2024-12-21 002032.png"
 import DiscordBotImage from "../assets/6PQtKYb - Imgur.png"
+import FloorTechsImage from "../assets/Screenshot 2025-08-02 151349.png"
+import RandomGeneratorImage from "../assets/Screenshot 2025-08-02 204152.png"
+import PredictPerformanceImage from "../assets/Screenshot 2025-08-02 204541.png"
 import { ProjectCardProps } from '../types/types';
 
 const projects: ProjectCardProps[] = [
@@ -21,7 +24,7 @@ const projects: ProjectCardProps[] = [
     {
         title: "Total War Community Hub",
         description: "Comprehensive platform for Total War gamers to connect, compete, and strategize.",
-        technologies: ["React", "Tailwind", "Firebase", "Google Gemini API", "Typescript", "ChakraUI"],
+        technologies: ["React", "Tailwind", "Firebase", "Google Gemini API", "Typescript", "ChakraUI", "Vercel"],
         demoLink: "https://tw-website.vercel.app/",
         githubLink: "https://github.com/bobitsvetkov/tw-website",
         image: TotalWarWebsiteImage,
@@ -29,10 +32,34 @@ const projects: ProjectCardProps[] = [
     {
         title: "Thracian Noble",
         description: "AI-powered bot providing game stats, recommendations, and community management.",
-        technologies: ["Python", "Discord.py", "Prompt Engineering", "OpenAI API", "Firebase"],
+        technologies: ["Python", "Discord.py", "Google Gemini API", "pytest", "Docker", "Youtube API", "json"],
         demoLink: "https://discord.gg/K9GU6VzrmK",
         githubLink: "https://github.com/bobitsvetkov/Total-War-Bot",
         image: DiscordBotImage,
+    },
+    {
+        title: "Floor-techs",
+        description: "A website for a flooring company, showcasing their services and portfolio.",
+        technologies: ["React", "Typescript", "Emailjs", "Tailwind", "Recaptcha", "Vercel"],
+        demoLink: "https://floor-techs.com/",
+        githubLink: "https://github.com/bobitsvetkov/floortechs-website",
+        image: FloorTechsImage,
+    },
+    {
+        title: "Rome-2-Random-Matchup-Generator",
+        description: "A simple web application that generates random matchups for the game Rome 2.",
+        technologies: ["Typescript", "React", "json"],
+        demoLink: "https://bobitsvetkov.github.io/Rome-2-Random-Matchup-Generator/",
+        githubLink: "https://github.com/bobitsvetkov/Rome-2-Random-Matchup-Generator",
+        image: RandomGeneratorImage,
+    },
+    {
+        title: "Predict Player Performance",
+        description: "My most recent project, a web application that predicts player performance using clustering and regression techniques. I also used my discord bot to gather data for my dataset.",
+        technologies: ["Python", "Streamlit", "Pandas", "NumPy", "Scikit-learn", "json"],
+        demoLink: "https://predict-player-performance.streamlit.app/",
+        githubLink: "https://github.com/bobitsvetkov/Predict-Player-Performance",
+        image: PredictPerformanceImage,
     }
 ];
 
@@ -42,7 +69,6 @@ const Projects: React.FC = () => {
             id="projects"
             className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden"
         >
-            {/* Background Grid */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute inset-0 bg-[length:40px_40px] bg-grid-white/[0.03]
                     [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]">
