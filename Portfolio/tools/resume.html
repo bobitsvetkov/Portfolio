@@ -2,127 +2,126 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Borislav Tsvetkov — Full-Stack Developer</title>
+<title>Borislav Tsvetkov — Software Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
 <style>
-  /* Single-column layout on purpose: multi-column resumes frequently get
-     scrambled by ATS parsers, which read in DOM order across columns. */
-  @page { size: A4; margin: 10mm 13mm; }
+  /* Single column on purpose: multi-column resumes are frequently scrambled by
+     ATS parsers, which follow the PDF text stream rather than the visual layout. */
+  @page { size: A4; margin: 11mm 14mm; }
 
   :root {
-    --ink:      #14181f;
-    --muted:    #5b6472;
-    --faint:    #858d9a;
-    --accent:   #1e4d8c;
-    --rule:     #d9dee6;
+    --ink:   #000;
+    --muted: #333;
+    --rule:  #000;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: Inter, -apple-system, "Segoe UI", sans-serif;
-    font-size: 9.1pt;
-    line-height: 1.36;
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    /* Oldstyle figures — dates sit into the text rather than shouting. */
+    font-variant-numeric: oldstyle-nums;
+    font-feature-settings: "onum" 1;
+    font-size: 8.9pt;
+    line-height: 1.27;
     color: var(--ink);
     background: #fff;
-    -webkit-font-smoothing: antialiased;
   }
 
-  a { color: var(--accent); text-decoration: none; }
+  a { color: inherit; text-decoration: none; }
 
   /* ---------- header ---------- */
-  header { display: flex; gap: 13px; align-items: center; margin-bottom: 10px; }
-  .photo {
-    width: 64px; height: 64px; border-radius: 50%;
-    object-fit: cover; flex-shrink: 0; border: 1px solid var(--rule);
-  }
+  header { text-align: center; margin-bottom: 11px; }
   h1 {
-    font-size: 19pt; font-weight: 700; letter-spacing: -0.5px;
-    line-height: 1.1; margin-bottom: 1px;
+    font-size: 20pt; font-weight: 700; letter-spacing: -0.2px;
+    line-height: 1.1; margin-bottom: 2px;
   }
-  .role {
-    font-size: 11pt; font-weight: 500; color: var(--accent);
-    margin-bottom: 5px;
+  .role { font-size: 11.5pt; font-style: italic; color: var(--muted); margin-bottom: 8px; }
+
+  .contacts {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 4px 14px; font-size: 9pt;
   }
-  .contact { font-size: 8.6pt; color: var(--muted); }
-  .contact span::after { content: "  ·  "; color: var(--faint); }
-  .contact span:last-child::after { content: ""; }
+  .contacts span { display: inline-flex; align-items: center; gap: 4px; }
+  .contacts svg { width: 9.5px; height: 9.5px; flex-shrink: 0; }
 
   /* ---------- sections ---------- */
-  section { margin-bottom: 7.5px; }
+  section { margin-bottom: 5.5px; }
   h2 {
-    font-size: 8.4pt; font-weight: 700; letter-spacing: 1.3px;
-    text-transform: uppercase; color: var(--accent);
-    padding-bottom: 2px; margin-bottom: 5px;
-    border-bottom: 1.2px solid var(--rule);
+    font-size: 10.8pt; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border-bottom: 1.1px solid var(--rule);
+    padding-bottom: 1px; margin-bottom: 4px;
   }
-
-  .summary { color: #2b323c; }
 
   /* ---------- entries ---------- */
-  .entry { margin-bottom: 6.5px; break-inside: avoid; }
+  .entry { margin-bottom: 4.5px; break-inside: avoid; }
   .entry:last-child { margin-bottom: 0; }
-  .entry-head {
-    display: flex; justify-content: space-between;
-    align-items: baseline; gap: 12px;
-  }
-  .entry-title { font-weight: 600; font-size: 9.6pt; }
-  .entry-org { font-weight: 500; color: var(--accent); }
-  .entry-meta {
-    font-size: 8.4pt; color: var(--muted);
-    white-space: nowrap; flex-shrink: 0;
-  }
-  .entry-sub { font-size: 8.6pt; color: var(--muted); margin-bottom: 3px; }
+  .entry-head { display: flex; justify-content: space-between; gap: 16px; }
+  .entry-l { flex: 1; }
+  .entry-r { text-align: right; flex-shrink: 0; font-size: 9pt; }
+  .title { font-weight: 700; }
+  .org { font-style: italic; color: var(--muted); }
+  .dates { white-space: nowrap; }
+  .place { text-transform: uppercase; font-size: 8.4pt; color: var(--muted); white-space: nowrap; }
+  .note { font-style: italic; color: var(--muted); font-size: 9pt; }
 
-  /* Plain list markers, deliberately. Absolutely-positioned custom bullets
-     put each <li> in its own paint layer, which makes Chromium emit the text
-     out of document order in the PDF content stream and scrambles ATS parsing. */
-  ul { margin-top: 2px; padding-left: 12px; list-style: disc outside; }
-  li { margin-bottom: 1.5px; color: #2b323c; }
-  li::marker { color: var(--faint); font-size: 0.8em; }
+  /* Native markers: a custom absolutely-positioned bullet puts each <li> in its
+     own paint layer, which makes Chromium emit the text out of document order. */
+  ul { margin: 1px 0 0; padding-left: 12px; list-style: disc outside; }
+  li { margin-bottom: 0.5px; }
+
+  /* Education carries no bullets, so two compact columns reclaim a page. */
+  .edu { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 22px; }
+  .edu .dates { font-size: 8.8pt; color: var(--muted); }
 
   /* ---------- skills ---------- */
-  .skills { display: grid; grid-template-columns: 92px 1fr; gap: 1.5px 12px; }
-  .skills dt { font-weight: 600; color: var(--muted); font-size: 8.8pt; }
-  .skills dd { color: #2b323c; }
+  .skills { display: grid; grid-template-columns: 84px 1fr; gap: 1px 10px; }
+  .skills dt { font-weight: 700; }
 
-  /* ---------- compact two-up footer blocks ---------- */
-  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px; }
-  .mini { font-size: 8.9pt; margin-bottom: 3.5px; }
-  .mini-t { font-weight: 600; }
-  .mini-s { color: var(--muted); font-size: 8.5pt; }
+  p + p { margin-top: 5px; }
 </style>
 </head>
 <body>
 
 <header>
-  <img class="photo" src="photo.jpg" alt="">
-  <div>
-    <h1>Borislav Tsvetkov</h1>
-    <div class="role">Full-Stack Developer — Backend · Mobile · Cloud</div>
-    <div class="contact">
-      <span>Sofia, Bulgaria</span>
-      <span>+359 88 274 7138</span>
-      <span>borislav.tsvetkov02@gmail.com</span>
-    </div>
-    <div class="contact">
-      <span><a href="https://bobitsvetkov.github.io/Portfolio/">bobitsvetkov.github.io/Portfolio</a></span>
-      <span><a href="https://www.linkedin.com/in/borislav-tsvetkov-818397198/">linkedin.com/in/borislav-tsvetkov</a></span>
-      <span><a href="https://github.com/bobitsvetkov">github.com/bobitsvetkov</a></span>
-    </div>
+  <h1>Borislav Tsvetkov</h1>
+  <div class="role">Software Engineer</div>
+  <div class="contacts">
+    <span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      borislav.tsvetkov02@gmail.com
+    </span>
+    <span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+      0882747138
+    </span>
+    <span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+      Sofia, Bulgaria
+    </span>
+    <span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.1 4.7 18.1 5 18.1 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+      <a href="https://github.com/bobitsvetkov">Github</a>
+    </span>
+    <span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.7a1.8 1.8 0 1 1 0-3.5 1.8 1.8 0 0 1 0 3.5zM19 19h-3v-4.4c0-1.1 0-2.4-1.5-2.4S13 13.3 13 14.5V19h-3v-9h2.9v1.2h.05A3.2 3.2 0 0 1 15.8 9.7c3.1 0 3.7 2 3.7 4.7V19z"/></svg>
+      <a href="https://www.linkedin.com/in/borislav-tsvetkov-818397198/">LinkedIn</a>
+    </span>
   </div>
 </header>
 
 <section>
-  <h2>Summary</h2>
-  <p class="summary">
+  <h2>Profile</h2>
+  <p>
     Full-stack developer across the whole stack — frontend, backend, mobile and the
-    infrastructure underneath. Co-founded LHBSoft and architected ReForge, a SaaS platform
-    for car repair shops, from an empty repository to a revenue-generating product on web,
-    iOS and Android. Now deepening cloud expertise at SoftwareOne, working toward carrying
-    a project from architecture to production single-handedly.
+    infrastructure underneath. After Telerik Academy I joined DSK Bank, moving from
+    Junior to Software Engineer, then co-founded LHBSoft and architected ReForge from
+    an empty repository to a revenue-generating product on web, iOS and Android. Now
+    at SoftwareOne, deepening my cloud expertise so I can carry a project from
+    architecture to production on my own. I love building things.
   </p>
 </section>
 
@@ -131,10 +130,14 @@
 
   <div class="entry">
     <div class="entry-head">
-      <div class="entry-title">
-        Fullstack Engineer &middot; <span class="entry-org">SoftwareOne</span>
+      <div class="entry-l">
+        <div class="title">Fullstack Engineer</div>
+        <div class="org">SoftwareOne</div>
       </div>
-      <div class="entry-meta">05/2026 — Present &nbsp;·&nbsp; Sofia</div>
+      <div class="entry-r">
+        <div class="dates">05/2026 – Present</div>
+        <div class="place">Sofia, Bulgaria</div>
+      </div>
     </div>
     <ul>
       <li>Application development in Python against REST APIs and SQL databases.</li>
@@ -144,23 +147,28 @@
 
   <div class="entry">
     <div class="entry-head">
-      <div class="entry-title">
-        Co-founder &amp; Lead Engineer &middot; <span class="entry-org">LHBSoft</span>
+      <div class="entry-l">
+        <div class="title">Co-founder &amp; Lead Engineer</div>
+        <div class="org">LHBSoft — built in parallel with my role at DSK Bank</div>
       </div>
-      <div class="entry-meta">09/2025 — 05/2026 &nbsp;·&nbsp; Sofia</div>
+      <div class="entry-r">
+        <div class="dates">09/2025 – 05/2026</div>
+        <div class="place">Sofia, Bulgaria</div>
+      </div>
     </div>
-    <div class="entry-sub">ReForge — SaaS platform for car repair shops, owners and mechanics · built in parallel with a full-time role at DSK Bank</div>
     <ul>
-      <li>Architected the product from an empty repository to a revenue-generating
-          service, live on web, iOS and Android.</li>
-      <li>Designed and built the Python/FastAPI backend: 338 REST endpoints across 172
-          modules, raw asyncpg over PostgreSQL, JWT auth across six user roles,
-          AES-256-GCM encryption of personal data at rest, Stripe billing, and realtime
-          WebSocket fan-out via Postgres LISTEN/NOTIFY.</li>
-      <li>Led the migration of the API off Next.js onto a modular FastAPI service, with a
-          contract test that fails the build if any route ships without an auth dependency.</li>
+      <li>Architected ReForge, a SaaS platform for car repair shops, from an empty
+          repository to a revenue-generating product live on web, iOS and Android.</li>
+      <li>Built the Python/FastAPI backend: 338 REST endpoints across 172 modules, raw
+          asyncpg over PostgreSQL, JWT auth across six user roles, AES-256-GCM
+          encryption of personal data at rest, Stripe billing, and realtime WebSocket
+          fan-out via Postgres LISTEN/NOTIFY.</li>
+      <li>Led the migration of the API off Next.js onto a modular FastAPI service, with
+          a contract test that fails the build if any route ships without an auth
+          dependency.</li>
       <li>Built the Flutter mobile app end to end — 93 screens, EN/BG localisation,
-          biometric login, push notifications — and shipped it to the App Store and Google Play.</li>
+          biometric login, push notifications — and shipped it to the App Store and
+          Google Play.</li>
       <li>Ran the stack on AWS EC2 with Docker Compose, 445 pytest tests and Sentry
           tracing; integrated an LLM agent with read/write tools over shop data plus
           invoice and registration scanning with structured field extraction.</li>
@@ -169,48 +177,75 @@
 
   <div class="entry">
     <div class="entry-head">
-      <div class="entry-title">
-        Junior BAW Developer &middot; <span class="entry-org">DSK Bank</span>
+      <div class="entry-l">
+        <div class="title">Software Engineer</div>
+        <div class="org">DSK Bank</div>
       </div>
-      <div class="entry-meta">11/2023 — 05/2026 &nbsp;·&nbsp; Sofia</div>
+      <div class="entry-r">
+        <div class="dates">05/2025 – 05/2026</div>
+        <div class="place">Sofia, Bulgaria</div>
+      </div>
     </div>
     <ul>
-      <li>Automated business processes on IBM Business Automation Workflow, cutting manual
-          handling and customer waiting times.</li>
+      <li>Refactored and optimised legacy services, reducing resource usage by over 10x
+          and significantly improving performance and scalability.</li>
+      <li>Conducted technical interviews, contributing to hiring decisions and team growth.</li>
+      <li>Collaborated in feature planning and optimisation, ensuring alignment with
+          business goals and technical feasibility.</li>
     </ul>
   </div>
 
   <div class="entry">
     <div class="entry-head">
-      <div class="entry-title">
-        JavaScript Developer &middot; <span class="entry-org">Freelance</span>
+      <div class="entry-l">
+        <div class="title">Junior Software Engineer</div>
+        <div class="org">DSK Bank</div>
       </div>
-      <div class="entry-meta">07/2023 — 09/2023 &nbsp;·&nbsp; Sofia</div>
+      <div class="entry-r">
+        <div class="dates">09/2023 – 05/2025</div>
+        <div class="place">Sofia, Bulgaria</div>
+      </div>
     </div>
     <ul>
-      <li>Built a site for a Twitch streamer to grow revenue and audience — donation and
-          influencer links, merchandise, embedded video and community challenges.</li>
+      <li>Developed and maintained a loan application, with a focus on reliability and
+          availability.</li>
+      <li>Resolved production incidents in Remedy.</li>
+      <li>Used JavaScript, JSON, XML and SQL throughout the development process.</li>
     </ul>
   </div>
 </section>
 
 <section>
-  <h2>Selected Projects</h2>
+  <h2>Projects</h2>
 
   <div class="entry">
     <div class="entry-head">
-      <div class="entry-title">Predict Player Performance</div>
-      <div class="entry-meta">Python · pandas · NumPy · scikit-learn · Streamlit</div>
+      <div class="entry-l">
+        <div class="title">Predict Player Performance</div>
+        <div class="note">Python · pandas · NumPy · scikit-learn · Streamlit</div>
+      </div>
+      <div class="entry-r"><div class="dates">06/2025 – 08/2025</div></div>
     </div>
-    <div class="entry-sub">Clustering and regression predicting competitive player performance; dataset gathered by a Discord bot I wrote. The interest it drew renewed player activity, producing more data to model on.</div>
+    <ul>
+      <li>Clustering and regression pipeline ranking tournament players on performance
+          metrics, using RandomForestRegressor tuned with GridSearchCV and 5-fold
+          cross-validation. The dataset came from a Discord bot I wrote for the purpose.</li>
+    </ul>
   </div>
 
   <div class="entry">
     <div class="entry-head">
-      <div class="entry-title">Thracian Noble</div>
-      <div class="entry-meta">Python · discord.py · Gemini API · Docker · pytest</div>
+      <div class="entry-l">
+        <div class="title">Thracian Noble — Discord bot with AI integration</div>
+        <div class="note">Python · discord.py · Gemini API · Docker · pytest</div>
+      </div>
+      <div class="entry-r"><div class="dates">10/2023 – 11/2024</div></div>
     </div>
-    <div class="entry-sub">AI-assisted Discord bot serving game statistics, recommendations and moderation to a gaming community.</div>
+    <ul>
+      <li>A side project that got me interested in AI. Hitting the limits of prompt
+          injection through an API pushed me into learning how training and fine-tuning
+          actually work.</li>
+    </ul>
   </div>
 </section>
 
@@ -221,44 +256,26 @@
     <dt>Backend</dt>        <dd>FastAPI, REST API design, Pydantic, asyncpg, PostgreSQL, WebSockets, Stripe</dd>
     <dt>Mobile</dt>         <dd>Flutter, Firebase Cloud Messaging, App Store &amp; Google Play releases</dd>
     <dt>Frontend</dt>       <dd>React, Next.js, Tailwind CSS</dd>
-    <dt>Cloud &amp; DevOps</dt> <dd>AWS (EC2, cost optimisation), Docker, Linux, CI/CD, Sentry</dd>
-    <dt>Testing</dt>        <dd>pytest, unit and integration testing</dd>
+    <dt>Cloud</dt>          <dd>AWS (EC2, cost optimisation), Docker, Linux, CI/CD, Sentry</dd>
     <dt>Data &amp; AI</dt>  <dd>pandas, NumPy, scikit-learn, LLM tool-calling agents</dd>
   </dl>
 </section>
 
-<div class="cols">
-  <section>
-    <h2>Education</h2>
-    <div class="mini">
-      <div class="mini-t">Alpha JavaScript Track</div>
-      <div class="mini-s">Telerik Academy · 01/2023 — 06/2023</div>
+<section>
+  <h2>Education</h2>
+  <div class="edu">
+    <div>
+      <div class="title">Software Engineering | Telerik Academy JS Graduate</div>
+      <div class="org">Telerik Academy · Sofia</div>
+      <div class="dates">01/2023 – 07/2023</div>
     </div>
-    <div class="mini">
-      <div class="mini-t">B.Sc. German Language and Literature</div>
-      <div class="mini-s">New Bulgarian University · 2017 — present</div>
+    <div>
+      <div class="title">Electronics</div>
+      <div class="org">VHS of Electronics “John Atanasov” · Sofia</div>
+      <div class="dates">09/2013 – 08/2017</div>
     </div>
-    <div class="mini">
-      <div class="mini-t">Industrial Electronics</div>
-      <div class="mini-s">VHS of Electronics “John Atanasov” · 2013 — 2017</div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Certifications &amp; Languages</h2>
-    <div class="mini">
-      <div class="mini-t">Meta Front-End Developer</div>
-      <div class="mini-s">Coursera</div>
-    </div>
-    <div class="mini">
-      <div class="mini-t">Technical Support Fundamentals</div>
-      <div class="mini-s">Coursera</div>
-    </div>
-    <div class="mini">
-      <div class="mini-t">English — Proficient &nbsp;·&nbsp; German — Intermediate</div>
-    </div>
-  </section>
-</div>
+  </div>
+</section>
 
 </body>
 </html>

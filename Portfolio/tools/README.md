@@ -5,7 +5,7 @@ readable diff instead of an opaque blob.
 
 | Source | Output | Used by |
 | --- | --- | --- |
-| `resume.html` + `photo.jpg` | `public/BorislavTsvetkovResume.pdf` | Resume link, terminal `resume` command |
+| `resume.html` | `public/BorislavTsvetkovResume.pdf` | Resume link, terminal `resume` command |
 | `og.html` | `public/og.png` | `og:image` / `twitter:image` link previews |
 | `../public/favicon.svg` | `public/apple-touch-icon.png` | iOS home screen |
 
@@ -26,6 +26,10 @@ npm run assets og       # or a single target: resume | og | icon
 ```
 
 ## Resume layout notes
+
+Serif throughout (Source Serif 4) with oldstyle figures, so dates sit into the
+text instead of shouting. `photo.jpg` is kept but unused — the current design
+has no portrait; re-add an `<img>` in the header if you want one back.
 
 Two deliberate choices, both about how applicant tracking systems read PDFs:
 
