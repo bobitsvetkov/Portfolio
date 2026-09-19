@@ -14,13 +14,13 @@ const Terminal = () => {
   } = useTerminal();
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4">
-      <div className="bg-gray-900 rounded-lg shadow-xl border border-gray-700">
+    <div className="mx-auto w-full max-w-4xl">
+      <div className="overflow-hidden rounded-xl border border-surface-line bg-surface-3/80 shadow-2xl shadow-black/40 backdrop-blur-sm">
         <TerminalHeader />
 
-        <div 
-          ref={terminalContentRef} 
-          className="p-4 font-mono h-[400px] overflow-y-auto" 
+        <div
+          ref={terminalContentRef}
+          className="h-[380px] overflow-y-auto p-4 font-mono text-sm"
           onClick={focusInput}
         >
           <HistoryList entries={history} />
@@ -31,7 +31,7 @@ const Terminal = () => {
             onKeyDown={handleKeyDown}
             inputRef={inputRef}
           />
-          
+
           <div ref={terminalEndRef} />
         </div>
       </div>

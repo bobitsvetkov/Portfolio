@@ -1,65 +1,59 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import {
-    Code,
-    Rocket
-} from 'lucide-react';
+import { m } from 'motion/react';
 import { ProjectCard } from './ProjectCard';
-import TotalWarWebsiteImage from "../assets/Screenshot 2024-12-21 002032.png"
-import DiscordBotImage from "../assets/6PQtKYb - Imgur.png"
-import FloorTechsImage from "../assets/Screenshot 2025-08-02 151349.png"
-import RandomGeneratorImage from "../assets/Screenshot 2025-08-02 204152.png"
-import PredictPerformanceImage from "../assets/Screenshot 2025-08-02 204541.png"
+import TotalWarWebsiteImage from "../assets/total-war-hub.webp"
+import DiscordBotImage from "../assets/thracian-noble.webp"
+import FloorTechsImage from "../assets/floor-techs.webp"
+import RandomGeneratorImage from "../assets/rome-2-matchup-generator.webp"
+import PredictPerformanceImage from "../assets/predict-player-performance.webp"
 import { ProjectCardProps } from '../types/types';
 
+// `outcome` is optional and intentionally unset — add one line per project
+// (users reached, rows processed, problem solved) and the card renders it.
 const projects: ProjectCardProps[] = [
     {
-        title: "Connectify",
-        description: "Advanced conversational AI with personalized interaction capabilities. Built with state-of-the-art language models and real-time communication.",
-        technologies: ["React", "TypeScript", "OpenAI API", "Agora", "Redux"],
-        demoLink: "https://connectify-telerikproject.vercel.app/",
-        githubLink: "https://github.com/bobitsvetkov/Connectify",
-        image: "https://raw.githubusercontent.com/bobitsvetkov/Connectify/main/Connectify/src/assets/images/Landing1.png",
+        title: "Predict Player Performance",
+        description: "A web application that predicts player performance using clustering and regression techniques. I used my Discord bot to gather the data behind the dataset.",
+        technologies: ["Python", "Streamlit", "Pandas", "NumPy", "Scikit-learn", "json"],
+        demoLink: "https://predict-player-performance.streamlit.app/",
+        githubLink: "https://github.com/bobitsvetkov/Predict-Player-Performance",
+        image: PredictPerformanceImage,
+        featured: true,
     },
+    {
+        title: "Rome 2 Matchup Generator",
+        description: "A web application that generates random faction matchups for Total War: Rome 2.",
+        technologies: ["Typescript", "React", "json"],
+        demoLink: "https://bobitsvetkov.github.io/Rome-2-Random-Matchup-Generator/",
+        githubLink: "https://github.com/bobitsvetkov/Rome-2-Random-Matchup-Generator",
+        image: RandomGeneratorImage,
+    }
+];
+
+const legacyProjects: ProjectCardProps[] = [
     {
         title: "Total War Community Hub",
         description: "Comprehensive platform for Total War gamers to connect, compete, and strategize.",
         technologies: ["React", "Tailwind", "Firebase", "Google Gemini API", "Typescript", "ChakraUI", "Vercel"],
-        demoLink: "https://tw-website.vercel.app/",
         githubLink: "https://github.com/bobitsvetkov/tw-website",
         image: TotalWarWebsiteImage,
+        isLegacy: true,
     },
     {
         title: "Thracian Noble",
-        description: "AI-powered bot providing game stats, recommendations, and community management.",
+        description: "AI-powered Discord bot providing game stats, recommendations, and community management.",
         technologies: ["Python", "Discord.py", "Google Gemini API", "pytest", "Docker", "Youtube API", "json"],
-        demoLink: "https://discord.gg/K9GU6VzrmK",
         githubLink: "https://github.com/bobitsvetkov/Total-War-Bot",
         image: DiscordBotImage,
+        isLegacy: true,
     },
     {
         title: "Floor-techs",
         description: "A website for a flooring company, showcasing their services and portfolio.",
         technologies: ["React", "Typescript", "Emailjs", "Tailwind", "Recaptcha", "Vercel"],
-        demoLink: "https://floor-techs.com/",
         githubLink: "https://github.com/bobitsvetkov/floortechs-website",
         image: FloorTechsImage,
-    },
-    {
-        title: "Rome-2-Random-Matchup-Generator",
-        description: "A simple web application that generates random matchups for the game Rome 2.",
-        technologies: ["Typescript", "React", "json"],
-        demoLink: "https://bobitsvetkov.github.io/Rome-2-Random-Matchup-Generator/",
-        githubLink: "https://github.com/bobitsvetkov/Rome-2-Random-Matchup-Generator",
-        image: RandomGeneratorImage,
-    },
-    {
-        title: "Predict Player Performance",
-        description: "My most recent project, a web application that predicts player performance using clustering and regression techniques. I also used my discord bot to gather data for my dataset.",
-        technologies: ["Python", "Streamlit", "Pandas", "NumPy", "Scikit-learn", "json"],
-        demoLink: "https://predict-player-performance.streamlit.app/",
-        githubLink: "https://github.com/bobitsvetkov/Predict-Player-Performance",
-        image: PredictPerformanceImage,
+        isLegacy: true,
     }
 ];
 
@@ -67,42 +61,75 @@ const Projects: React.FC = () => {
     return (
         <section
             id="projects"
-            className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden"
+            className="relative overflow-hidden section-seam bg-surface-2 py-24 text-white"
         >
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[length:40px_40px] bg-grid-white/[0.03]
-                    [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]">
-                </div>
-            </div>
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_center,black_10%,transparent_70%)]"
+            />
 
-            <div className="w-full px-4 md:px-8 lg:px-16 max-w-screen-xl mx-auto relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
+            <div className="relative mx-auto w-full max-w-7xl px-6 lg:px-12">
+                <m.div
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5 }}
+                    className="mb-14 max-w-3xl"
                 >
-                    <div className="flex items-center justify-center space-x-4 mb-6">
-                        <Rocket className="w-12 h-12 text-primary-400" />
-                        <h2 className="text-5xl font-bold text-white">Featured Projects</h2>
-                        <Code className="w-12 h-12 text-accent-400" />
-                    </div>
-                    <p className="max-w-3xl mx-auto text-xl text-gray-300 leading-relaxed">
-                        A showcase of my technical projects, featuring web applications,
-                        AI integrations, and innovative solutions.
+                    <p className="mb-3 font-mono text-sm text-primary-400">02 / work</p>
+                    <h2 className="mb-6 font-display text-4xl font-bold tracking-tight md:text-section">
+                        Things I have built
+                    </h2>
+                    <p className="text-lg leading-relaxed text-gray-400">
+                        Web applications, AI integrations, and data tooling — mostly grown
+                        out of problems I ran into myself.
                     </p>
-                </motion.div>
+                </m.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project) => (
-                        <motion.div
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {projects.map((project, index) => (
+                        <m.div
                             key={project.title}
-                            initial={{ opacity: 0, y: 50 }}
+                            initial={{ opacity: 0, y: 24 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: projects.indexOf(project) * 0.2 }}
+                            viewport={{ once: true, amount: 0.15 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            className={project.featured ? 'md:col-span-2' : ''}
                         >
                             <ProjectCard {...project} />
-                        </motion.div>
+                        </m.div>
+                    ))}
+                </div>
+
+                <m.div
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5 }}
+                    className="mb-10 mt-20 flex flex-col gap-3 border-t border-surface-line pt-12 sm:flex-row sm:items-end sm:justify-between"
+                >
+                    <div>
+                        <h3 className="font-display text-2xl font-semibold text-gray-300">
+                            Legacy Projects
+                        </h3>
+                        <p className="mt-2 max-w-2xl text-gray-500">
+                            No longer maintained. The live deployments are retired, but the
+                            source is still on GitHub.
+                        </p>
+                    </div>
+                </m.div>
+
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {legacyProjects.map((project, index) => (
+                        <m.div
+                            key={project.title}
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.15 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                        >
+                            <ProjectCard {...project} />
+                        </m.div>
                     ))}
                 </div>
             </div>

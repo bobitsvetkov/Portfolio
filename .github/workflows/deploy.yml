@@ -27,20 +27,19 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
           cache-dependency-path: './Portfolio/package-lock.json'
 
       - name: Install dependencies
         working-directory: ./Portfolio
-        run: npm install
+        run: npm ci
 
       - name: Build
         env:
           VITE_EMAIL_JS_PUBLIC_KEY: ${{ secrets.EMAIL_JS_PUBLIC_KEY }}
           VITE_EMAIL_JS_SERVICE_KEY: ${{ secrets.EMAIL_JS_SERVICE_KEY }}
           VITE_EMAIL_JS_TEMPLATE_KEY: ${{ secrets.EMAIL_JS_TEMPLATE_KEY }}
-          VITE_RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
           VITE_RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
         working-directory: ./Portfolio
         run: npm run build

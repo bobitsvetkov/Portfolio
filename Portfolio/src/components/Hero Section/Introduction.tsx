@@ -1,52 +1,40 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'motion/react';
 import { IntroductionProps } from '../../types/types';
 
 export const Introduction = ({ name, currentWordIndex, introduction }: IntroductionProps) => (
-    <div className="text-center mb-8">
-        <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-6xl md:text-7xl font-bold mb-4"
+    <div className="mb-12 text-center">
+        <m.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="mb-5 font-mono text-sm tracking-tight text-primary-300"
         >
-            Hello World, I'm{' '}
-            <motion.span
-                className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            >
-                {name.split('').map((letter, index) => {
-                    const uniqueKey = `${name}-letter-${index}`;
-                    return (
-                        <motion.span
-                            key={uniqueKey}
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{
-                                delay: index * 0.05,
-                                duration: 0.3,
-                            }}
-                        >
-                            {letter}
-                        </motion.span>
-                    );
-                })}
-            </motion.span>
-        </motion.h1>
+            $ whoami
+        </m.p>
 
-        <AnimatePresence mode="wait">
-            <motion.p
-                key={currentWordIndex}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ opacity: { duration: 0.5 }, y: { duration: 0.5 } }}
-                className="text-xl text-gray-300"
-            >
-                {introduction[currentWordIndex]}
-            </motion.p>
-        </AnimatePresence>
+        <m.h1
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="mb-5 font-display text-5xl font-bold tracking-tight md:text-display"
+        >
+            Hello World, I&apos;m{' '}
+            <span className="text-gradient">{name}</span>
+        </m.h1>
+
+        <div className="flex h-8 items-center justify-center">
+            <AnimatePresence mode="wait">
+                <m.p
+                    key={currentWordIndex}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.4 }}
+                    className="text-lg text-gray-400 md:text-xl"
+                >
+                    {introduction[currentWordIndex]}
+                </m.p>
+            </AnimatePresence>
+        </div>
     </div>
 );

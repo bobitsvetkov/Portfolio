@@ -1,34 +1,45 @@
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { Introduction } from './Introduction';
 import Terminal from './Terminal/Terminal';
+
+const INTRODUCTION = [
+    "Fullstack Developer",
+    "AI Enthusiast",
+    "IBM BPM Developer",
+    "Passionate Gamer"
+];
 
 const Hero = () => {
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
-    const introduction = [
-        "Fullstack Developer",
-        "AI Enthusiast",
-        "IBM BPM Developer",
-        "Passionate Gamer"
-    ];
-
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentWordIndex((prevIndex) => (prevIndex + 1) % introduction.length);
+            setCurrentWordIndex((prevIndex) => (prevIndex + 1) % INTRODUCTION.length);
         }, 4000);
         return () => clearInterval(interval);
-    }, [introduction.length]);
+    }, []);
 
     return (
-        <section className="relative w-full min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white flex flex-col overflow-x-hidden">
-            <div className="flex-1 container mx-auto px-4 pt-20 flex flex-col">
+        <section
+            id="home"
+            className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-surface-0 text-white"
+        >
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_50%_35%,black_20%,transparent_75%)]"
+            />
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute left-1/2 top-0 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-primary-600/12 blur-[110px]"
+            />
+
+            <div className="relative flex flex-1 flex-col container mx-auto px-4 pb-24 pt-28">
                 <Introduction
                     name="Borislav"
                     currentWordIndex={currentWordIndex}
-                    introduction={introduction}
+                    introduction={INTRODUCTION}
                 />
-                <Terminal
-                />
+                <Terminal />
             </div>
         </section>
     );

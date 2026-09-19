@@ -1,8 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import {
-    ExternalLink,
-} from 'lucide-react';
+import { m } from 'motion/react';
+import { ArrowUpRight } from 'lucide-react';
 import { BsGithub } from 'react-icons/bs';
 import { ProjectCardProps } from '../types/types';
 
@@ -13,57 +11,101 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     demoLink,
     githubLink,
     image,
+    isLegacy = false,
+    outcome,
+    featured = false,
 }) => {
     return (
-        <motion.div
-            whileHover={{ y: -5 }}
+        <m.article
+            whileHover={{ y: -4 }}
             transition={{ duration: 0.2 }}
-            className="h-full bg-gray-900 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 group flex flex-col"
+            className="group flex h-full flex-col overflow-hidden rounded-2xl border border-surface-line bg-surface-3 transition-colors hover:border-primary-500/40"
         >
-            <div className="relative">
+            <div className="relative overflow-hidden">
                 <img
                     src={image}
-                    alt={title}
-                    className="w-full h-48 object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                    alt={`Screenshot of ${title}`}
+                    loading="lazy"
+                    decoding="async"
+                    className={`w-full object-cover transition-all duration-500 ${
+                        featured ? 'h-56 lg:h-72' : 'h-44'
+                    } ${
+                        isLegacy
+                            ? 'opacity-40 grayscale group-hover:opacity-65'
+                            : 'opacity-80 group-hover:scale-[1.03] group-hover:opacity-100'
+                    }`}
                 />
-                <div className="absolute top-4 right-4 flex space-x-2">
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface-3 via-surface-3/20 to-transparent" />
+
+                <div className="absolute right-4 top-4 flex gap-2">
+                    {isLegacy && (
+                        <span className="rounded-full border border-surface-line bg-surface-0/80 px-3 py-1 text-xs font-medium text-gray-400 backdrop-blur-xs">
+                            Archived
+                        </span>
+                    )}
+                    {featured && (
+                        <span className="rounded-full border border-primary-500/40 bg-primary-600/20 px-3 py-1 text-xs font-medium text-primary-200 backdrop-blur-xs">
+                            Featured
+                        </span>
+                    )}
                 </div>
             </div>
 
-            <div className="p-6 bg-gray-800 flex-grow flex flex-col">
-                <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-2xl font-bold text-white flex-grow">{title}</h3>
-                    <div className="flex space-x-2 ml-4">
-                        <a
-                            href={demoLink}
-                            className="text-white hover:text-primary-400 transition-colors p-2 hover:bg-gray-700 rounded-full"
-                            title="View Demo"
-                        >
-                            <ExternalLink className="w-5 h-5" />
-                        </a>
+            <div className="flex flex-grow flex-col p-6">
+                <div className="mb-3 flex items-start justify-between gap-4">
+                    <h3
+                        className={`font-display font-semibold text-white ${
+                            featured ? 'text-2xl' : 'text-xl'
+                        }`}
+                    >
+                        {title}
+                    </h3>
+                    <div className="flex shrink-0 gap-1">
+                        {demoLink && (
+                            <a
+                                href={demoLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`View a live demo of ${title}`}
+                                className="rounded-lg p-2 text-gray-400 transition-colors hover:bg-surface-4 hover:text-primary-300"
+                            >
+                                <ArrowUpRight className="h-5 w-5" />
+                            </a>
+                        )}
                         <a
                             href={githubLink}
-                            className="text-white hover:text-primary-400 transition-colors p-2 hover:bg-gray-700 rounded-full"
-                            title="GitHub Repository"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`View the source of ${title} on GitHub`}
+                            className="rounded-lg p-2 text-gray-400 transition-colors hover:bg-surface-4 hover:text-primary-300"
                         >
-                            <BsGithub className="w-5 h-5" />
+                            <BsGithub className="h-5 w-5" />
                         </a>
                     </div>
                 </div>
 
-                <p className="text-gray-300 mb-6 flex-grow">{description}</p>
+                {outcome && (
+                    <p className="mb-3 flex items-start gap-2 text-sm font-medium text-primary-300">
+                        <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary-400" />
+                        {outcome}
+                    </p>
+                )}
 
-                <div className="flex flex-wrap gap-2 mt-auto">
+                <p className="mb-6 flex-grow text-sm leading-relaxed text-gray-400">
+                    {description}
+                </p>
+
+                <ul className="mt-auto flex flex-wrap gap-1.5">
                     {technologies.map((tech) => (
-                        <span
+                        <li
                             key={tech}
-                            className="px-3 bg-gray-700 text-white rounded-full text-xs font-medium hover:bg-gray-600 transition-colors"
+                            className="rounded-md border border-surface-line bg-surface-4 px-2.5 py-1 font-mono text-xs text-gray-400"
                         >
                             {tech}
-                        </span>
+                        </li>
                     ))}
-                </div>
+                </ul>
             </div>
-        </motion.div>
+        </m.article>
     );
 };

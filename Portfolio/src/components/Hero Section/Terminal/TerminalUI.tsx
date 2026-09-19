@@ -6,13 +6,13 @@ interface TerminalHeaderProps {
 }
 
 export const TerminalHeader = ({ title = 'route_terminal.sh' }: TerminalHeaderProps) => (
-  <div className="flex items-center px-4 py-2 bg-gray-800 rounded-t-lg border-b border-gray-700">
+  <div className="flex items-center border-b border-surface-line bg-surface-4/60 px-4 py-2.5">
     <div className="flex space-x-2">
-      <div className="w-3 h-3 rounded-full bg-red-500"></div>
-      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+      <div className="h-3 w-3 rounded-full bg-red-500/80"></div>
+      <div className="h-3 w-3 rounded-full bg-yellow-500/80"></div>
+      <div className="h-3 w-3 rounded-full bg-green-500/80"></div>
     </div>
-    <div className="flex-1 text-center text-gray-400 text-sm font-mono">
+    <div className="flex-1 text-center font-mono text-xs text-gray-500">
       {title}
     </div>
   </div>
@@ -22,33 +22,35 @@ interface CommandPromptProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 }
 
 export const CommandPrompt = ({ value, onChange, onKeyDown, inputRef }: CommandPromptProps) => (
   <div className="flex items-center space-x-2">
-    <span className="text-blue-400">$</span>
+    <span className="text-primary-400" aria-hidden="true">$</span>
     <input
       ref={inputRef}
       type="text"
       value={value}
       onChange={onChange}
       onKeyDown={onKeyDown}
-      className="flex-1 bg-transparent text-white outline-none"
+      aria-label="Terminal command input"
+      className="flex-1 bg-transparent text-gray-100 outline-hidden placeholder:text-gray-600"
+      placeholder="type 'help'"
       spellCheck="false"
-      autoFocus
+      autoComplete="off"
     />
   </div>
 );
 
 export const HelpCommandOutput = () => (
   <div className="mt-2">
-    <p className="text-green-400 mb-2">Available commands:</p>
+    <p className="mb-2 text-green-400">Available commands:</p>
     {Object.entries(COMMANDS).map(([cmd, info]) => (
-      <div key={cmd} className="flex items-center space-x-2 mb-1">
-        <span className="text-blue-400">{info.icon}</span>
+      <div key={cmd} className="mb-1 flex items-center space-x-2">
+        <span className="text-primary-400">{info.icon}</span>
         <span className="text-yellow-400">{cmd}</span>
-        <span className="text-gray-400">- {info.desc}</span>
+        <span className="text-gray-500">- {info.desc}</span>
       </div>
     ))}
   </div>

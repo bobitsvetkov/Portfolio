@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, JSX } from 'react';
 import { Command, HelpCircle, Code, Briefcase, GraduationCap } from 'lucide-react';
 
 export interface CommandInfo {
