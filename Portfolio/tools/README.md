@@ -40,7 +40,11 @@ Two deliberate choices, both about how applicant tracking systems read PDFs:
   Chromium emit that text out of document order. The result looks correct to a
   human and parses as nonsense to a machine.
 
-After editing the resume, check the machine-readable order, not just the render:
+`npm run assets resume` prints how much vertical room is left on page 1, or warns
+if the content now overflows. The resume is meant to be one page and it is easy to
+push it to two by adding a sentence, so watch that line.
+
+After editing, also check the machine-readable order, not just the render:
 
 ```bash
 pdftotext -layout public/BorislavTsvetkovResume.pdf -

@@ -16,21 +16,43 @@ import path from 'node:path';
 const url = (p) => pathToFileURL(path.resolve(p)).href;
 
 const targets = {
-  /** Resume: A4 PDF. Page margins come from the @page rule in the stylesheet. */
+  /**
+   * Resume: A4 PDF. Page margins come from the @page rule in the stylesheet.
+   *
+   * The resume is meant to be one page, and it is easy to push it to two by
+   * adding a sentence — so this measures the rendered height at the real print
+   * width first and says how much room is left. Without that check a second,
+   * nearly-empty page appears silently.
+   */
   async resume(browser) {
-    const page = await browser.newPage();
+    const out = 'public/BorislavTsvetkovResume.pdf';
+    const mm = (v) => (v / 25.4) * 96;
+    const PAGE = { width: mm(210 - 28), height: mm(297 - 20) }; // A4 less @page margins
+
+    const page = await browser.newPage({
+      viewport: { width: Math.round(PAGE.width), height: Math.round(PAGE.height) },
+    });
     await page.goto(url('tools/resume.html'), { waitUntil: 'networkidle' });
     await page.evaluate(() => document.fonts.ready);
     await page.emulateMedia({ media: 'print' });
+
+    const height = await page.evaluate(() => document.body.scrollHeight);
+    const spare = Math.round(PAGE.height - height);
+    console.log(
+      spare >= 0
+        ? `  fit: ${spare}px of vertical room left on page 1`
+        : `  WARNING: content overflows page 1 by ${-spare}px — it will render as 2 pages`,
+    );
+
     await page.pdf({
-      path: 'public/BorislavTsvetkovResume.pdf',
+      path: out,
       format: 'A4',
       printBackground: true,
       margin: { top: '0', right: '0', bottom: '0', left: '0' },
       preferCSSPageSize: true,
     });
     await page.close();
-    return 'public/BorislavTsvetkovResume.pdf';
+    return out;
   },
 
   /** Share card: 1200x630 is what LinkedIn, Slack and X expect. */

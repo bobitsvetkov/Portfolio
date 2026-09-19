@@ -1,10 +1,9 @@
 import { m } from 'motion/react';
-import { Brain, Cloud, CreditCard, Database, GitBranch, Layers, Lock, TestTube } from 'lucide-react';
+import { Brain, Cloud, CloudCog, CreditCard, Database, GitBranch, Layers, Lock, TestTube } from 'lucide-react';
 import {
     DiJavascript1,
     DiPython,
     DiReact,
-    DiDatabase,
 } from 'react-icons/di';
 import {
     BiLogoTypescript,
@@ -16,6 +15,9 @@ import {
     SiPostgresql,
     SiFlutter,
     SiDocker,
+    SiKotlin,
+    SiGooglecloud,
+    SiNeo4J,
 } from 'react-icons/si';
 import { SkillGroup } from '../types/types';
 
@@ -54,7 +56,10 @@ const skillGroups: SkillGroup[] = [
         tier: 'Exploring',
         blurb: 'Actively learning right now.',
         skills: [
-            { name: 'Neo4j', icon: <DiDatabase className="h-4 w-4" /> },
+            { name: 'Kotlin', icon: <SiKotlin className="h-4 w-4" /> },
+            { name: 'Azure', icon: <CloudCog className="h-4 w-4" /> },
+            { name: 'Google Cloud', icon: <SiGooglecloud className="h-4 w-4" /> },
+            { name: 'Neo4j', icon: <SiNeo4J className="h-4 w-4" /> },
         ],
     },
 ];

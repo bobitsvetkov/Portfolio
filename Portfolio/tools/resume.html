@@ -9,7 +9,7 @@
 <style>
   /* Single column on purpose: multi-column resumes are frequently scrambled by
      ATS parsers, which follow the PDF text stream rather than the visual layout. */
-  @page { size: A4; margin: 11mm 14mm; }
+  @page { size: A4; margin: 10mm 14mm; }
 
   :root {
     --ink:   #000;
@@ -25,7 +25,7 @@
     font-variant-numeric: oldstyle-nums;
     font-feature-settings: "onum" 1;
     font-size: 8.9pt;
-    line-height: 1.27;
+    line-height: 1.235;
     color: var(--ink);
     background: #fff;
   }
@@ -33,12 +33,12 @@
   a { color: inherit; text-decoration: none; }
 
   /* ---------- header ---------- */
-  header { text-align: center; margin-bottom: 11px; }
+  header { text-align: center; margin-bottom: 9px; }
   h1 {
     font-size: 20pt; font-weight: 700; letter-spacing: -0.2px;
     line-height: 1.1; margin-bottom: 2px;
   }
-  .role { font-size: 11.5pt; font-style: italic; color: var(--muted); margin-bottom: 8px; }
+  .role { font-size: 11.5pt; font-style: italic; color: var(--muted); margin-bottom: 6px; }
 
   .contacts {
     display: flex; flex-wrap: wrap; justify-content: center;
@@ -48,16 +48,16 @@
   .contacts svg { width: 9.5px; height: 9.5px; flex-shrink: 0; }
 
   /* ---------- sections ---------- */
-  section { margin-bottom: 5.5px; }
+  section { margin-bottom: 4.5px; }
   h2 {
     font-size: 10.8pt; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.4px;
     border-bottom: 1.1px solid var(--rule);
-    padding-bottom: 1px; margin-bottom: 4px;
+    padding-bottom: 1px; margin-bottom: 3px;
   }
 
   /* ---------- entries ---------- */
-  .entry { margin-bottom: 4.5px; break-inside: avoid; }
+  .entry { margin-bottom: 3.5px; break-inside: avoid; }
   .entry:last-child { margin-bottom: 0; }
   .entry-head { display: flex; justify-content: space-between; gap: 16px; }
   .entry-l { flex: 1; }
@@ -71,14 +71,14 @@
   /* Native markers: a custom absolutely-positioned bullet puts each <li> in its
      own paint layer, which makes Chromium emit the text out of document order. */
   ul { margin: 1px 0 0; padding-left: 12px; list-style: disc outside; }
-  li { margin-bottom: 0.5px; }
+  li { margin-bottom: 0.25px; }
 
   /* Education carries no bullets, so two compact columns reclaim a page. */
-  .edu { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 22px; }
+  .edu { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 22px; }
   .edu .dates { font-size: 8.8pt; color: var(--muted); }
 
   /* ---------- skills ---------- */
-  .skills { display: grid; grid-template-columns: 84px 1fr; gap: 1px 10px; }
+  .skills { display: grid; grid-template-columns: 84px 1fr; gap: 0 10px; }
   .skills dt { font-weight: 700; }
 
   p + p { margin-top: 5px; }
@@ -121,7 +121,7 @@
     Junior to Software Engineer, then co-founded LHBSoft and architected ReForge from
     an empty repository to a revenue-generating product on web, iOS and Android. Now
     at SoftwareOne, deepening my cloud expertise so I can carry a project from
-    architecture to production on my own. I love building things.
+    architecture to production on my own.
   </p>
 </section>
 
@@ -159,10 +159,10 @@
     <ul>
       <li>Architected ReForge, a SaaS platform for car repair shops, from an empty
           repository to a revenue-generating product live on web, iOS and Android.</li>
-      <li>Built the Python/FastAPI backend: 338 REST endpoints across 172 modules, raw
-          asyncpg over PostgreSQL, JWT auth across six user roles, AES-256-GCM
-          encryption of personal data at rest, Stripe billing, and realtime WebSocket
-          fan-out via Postgres LISTEN/NOTIFY.</li>
+      <li>Built the Python/FastAPI backend: 338 REST endpoints over 172 modules, raw
+          asyncpg on PostgreSQL, JWT auth across six roles, AES-256-GCM encryption of
+          personal data at rest, Stripe billing, and realtime WebSocket fan-out via
+          Postgres LISTEN/NOTIFY.</li>
       <li>Led the migration of the API off Next.js onto a modular FastAPI service, with
           a contract test that fails the build if any route ships without an auth
           dependency.</li>
@@ -258,6 +258,15 @@
     <dt>Frontend</dt>       <dd>React, Next.js, Tailwind CSS</dd>
     <dt>Cloud</dt>          <dd>AWS (EC2, cost optimisation), Docker, Linux, CI/CD, Sentry</dd>
     <dt>Data &amp; AI</dt>  <dd>pandas, NumPy, scikit-learn, LLM tool-calling agents</dd>
+    <dt>Exploring</dt>      <dd>Kotlin, Azure, Google Cloud, Neo4j</dd>
+  </dl>
+</section>
+
+<section>
+  <h2>Certifications &amp; Languages</h2>
+  <dl class="skills">
+    <dt>Certified</dt>  <dd>Meta Front-End Developer · Technical Support Fundamentals — Coursera</dd>
+    <dt>Languages</dt>  <dd>English — Proficient · German — Intermediate · Bulgarian — Native</dd>
   </dl>
 </section>
 
@@ -266,13 +275,11 @@
   <div class="edu">
     <div>
       <div class="title">Software Engineering | Telerik Academy JS Graduate</div>
-      <div class="org">Telerik Academy · Sofia</div>
-      <div class="dates">01/2023 – 07/2023</div>
+      <div class="org">Telerik Academy · Sofia · 01/2023 – 07/2023</div>
     </div>
     <div>
       <div class="title">Electronics</div>
-      <div class="org">VHS of Electronics “John Atanasov” · Sofia</div>
-      <div class="dates">09/2013 – 08/2017</div>
+      <div class="org">VHS of Electronics “John Atanasov” · Sofia · 09/2013 – 08/2017</div>
     </div>
   </div>
 </section>
