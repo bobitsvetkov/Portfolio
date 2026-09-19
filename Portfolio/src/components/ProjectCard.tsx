@@ -1,8 +1,11 @@
 import React from 'react';
 import { m } from 'motion/react';
-import { ArrowUpRight } from 'lucide-react';
-import { BsGithub } from 'react-icons/bs';
+import { ArrowUpRight, Lock } from 'lucide-react';
+import { BsGithub, BsApple, BsGooglePlay } from 'react-icons/bs';
 import { ProjectCardProps } from '../types/types';
+
+const iconLink =
+    'rounded-lg p-2 text-gray-400 transition-colors hover:bg-surface-4 hover:text-primary-300';
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
     title,
@@ -14,6 +17,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     isLegacy = false,
     outcome,
     featured = false,
+    role,
+    appStoreLink,
+    playStoreLink,
+    privateSource = false,
 }) => {
     return (
         <m.article
@@ -53,34 +60,72 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
             <div className="flex flex-grow flex-col p-6">
                 <div className="mb-3 flex items-start justify-between gap-4">
-                    <h3
-                        className={`font-display font-semibold text-white ${
-                            featured ? 'text-2xl' : 'text-xl'
-                        }`}
-                    >
-                        {title}
-                    </h3>
+                    <div>
+                        <h3
+                            className={`font-display font-semibold text-white ${
+                                featured ? 'text-2xl' : 'text-xl'
+                            }`}
+                        >
+                            {title}
+                        </h3>
+                        {role && (
+                            <p className="mt-1 font-mono text-xs text-gray-500">{role}</p>
+                        )}
+                    </div>
                     <div className="flex shrink-0 gap-1">
                         {demoLink && (
                             <a
                                 href={demoLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label={`View a live demo of ${title}`}
-                                className="rounded-lg p-2 text-gray-400 transition-colors hover:bg-surface-4 hover:text-primary-300"
+                                aria-label={`Visit ${title}`}
+                                className={iconLink}
                             >
                                 <ArrowUpRight className="h-5 w-5" />
                             </a>
                         )}
-                        <a
-                            href={githubLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`View the source of ${title} on GitHub`}
-                            className="rounded-lg p-2 text-gray-400 transition-colors hover:bg-surface-4 hover:text-primary-300"
-                        >
-                            <BsGithub className="h-5 w-5" />
-                        </a>
+                        {appStoreLink && (
+                            <a
+                                href={appStoreLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`${title} on the App Store`}
+                                className={iconLink}
+                            >
+                                <BsApple className="h-5 w-5" />
+                            </a>
+                        )}
+                        {playStoreLink && (
+                            <a
+                                href={playStoreLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`${title} on Google Play`}
+                                className={iconLink}
+                            >
+                                <BsGooglePlay className="h-5 w-5" />
+                            </a>
+                        )}
+                        {githubLink && (
+                            <a
+                                href={githubLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`View the source of ${title} on GitHub`}
+                                className={iconLink}
+                            >
+                                <BsGithub className="h-5 w-5" />
+                            </a>
+                        )}
+                        {privateSource && (
+                            <span
+                                title="Commercial project — source is closed"
+                                className="flex items-center gap-1.5 rounded-lg px-2 py-2 text-xs text-gray-600"
+                            >
+                                <Lock className="h-4 w-4" />
+                                Closed source
+                            </span>
+                        )}
                     </div>
                 </div>
 

@@ -1,5 +1,5 @@
 import { m } from 'motion/react';
-import { Brain, Database, Lock } from 'lucide-react';
+import { Brain, Cloud, CreditCard, Database, GitBranch, Layers, Lock, TestTube } from 'lucide-react';
 import {
     DiJavascript1,
     DiPython,
@@ -11,39 +11,49 @@ import {
     BiLogoFirebase,
 } from 'react-icons/bi';
 import { PiOpenAiLogo } from 'react-icons/pi';
-import { SiBmcsoftware } from 'react-icons/si';
-import { GiProgression } from 'react-icons/gi';
+import {
+    SiFastapi,
+    SiPostgresql,
+    SiFlutter,
+    SiDocker,
+} from 'react-icons/si';
 import { SkillGroup } from '../types/types';
 
 /**
- * Grouped by how often each tool actually gets used, rather than a
- * self-scored percentage. The tiers map to the old 65+/50-64/<50 bands.
+ * Tiers reflect what ReForge is actually built with day to day, not a
+ * self-scored percentage.
  */
 const skillGroups: SkillGroup[] = [
     {
         tier: 'Daily',
-        blurb: 'Reach for these without thinking.',
+        blurb: 'What I ship production code in.',
         skills: [
-            { name: 'JavaScript', icon: <DiJavascript1 className="h-4 w-4" /> },
-            { name: 'TypeScript', icon: <BiLogoTypescript className="h-4 w-4" /> },
+            { name: 'Python', icon: <DiPython className="h-4 w-4" /> },
+            { name: 'FastAPI', icon: <SiFastapi className="h-4 w-4" /> },
+            { name: 'PostgreSQL', icon: <SiPostgresql className="h-4 w-4" /> },
             { name: 'SQL', icon: <Database className="h-4 w-4" /> },
-            { name: 'Remedy', icon: <SiBmcsoftware className="h-4 w-4" /> },
+            { name: 'Flutter / Dart', icon: <SiFlutter className="h-4 w-4" /> },
+            { name: 'TypeScript', icon: <BiLogoTypescript className="h-4 w-4" /> },
+            { name: 'Docker', icon: <SiDocker className="h-4 w-4" /> },
+            { name: 'AWS', icon: <Cloud className="h-4 w-4" /> },
         ],
     },
     {
         tier: 'Comfortable',
-        blurb: 'Productive, still sharpening the edges.',
+        blurb: 'Used in production, reach for the docs occasionally.',
         skills: [
-            { name: 'React', icon: <DiReact className="h-4 w-4" /> },
+            { name: 'React / Next.js', icon: <DiReact className="h-4 w-4" /> },
+            { name: 'JavaScript', icon: <DiJavascript1 className="h-4 w-4" /> },
+            { name: 'pytest', icon: <TestTube className="h-4 w-4" /> },
+            { name: 'Stripe', icon: <CreditCard className="h-4 w-4" /> },
             { name: 'Firebase', icon: <BiLogoFirebase className="h-4 w-4" /> },
+            { name: 'LLM integration', icon: <PiOpenAiLogo className="h-4 w-4" /> },
         ],
     },
     {
         tier: 'Exploring',
         blurb: 'Actively learning right now.',
         skills: [
-            { name: 'Python', icon: <DiPython className="h-4 w-4" /> },
-            { name: 'Prompt Engineering', icon: <PiOpenAiLogo className="h-4 w-4" /> },
             { name: 'Neo4j', icon: <DiDatabase className="h-4 w-4" /> },
         ],
     },
@@ -51,22 +61,28 @@ const skillGroups: SkillGroup[] = [
 
 const philosophy = [
     {
-        title: 'AI Integration',
+        title: 'The whole stack, not a slice',
         description:
-            'I leverage AI tools like OpenAI and Gemini to create interesting and creative solutions that enhance the user experience. One such solution was creating a faction analysis tool, so that players could see which faction suits their playstyle.',
-        icon: <PiOpenAiLogo className="h-5 w-5 text-primary-300" />,
+            'I think one developer should be able to carry a product across frontend, backend, mobile and the infrastructure it runs on. On ReForge that was literal: I wrote the FastAPI service, the Flutter app that talks to it, and the Docker deployment they both live in.',
+        icon: <Layers className="h-5 w-5 text-primary-300" />,
     },
     {
-        title: 'Focus on Security',
+        title: 'Architecture from an empty repo',
         description:
-            'I treat the client as untrusted: secrets live on the backend, forms are gated behind a captcha, and nothing sensitive ships in the bundle. That discipline came the hard way, after an early project of mine was breached because I left API keys in frontend code.',
+            'ReForge outgrew its original Next.js API, so I designed and ported it onto a modular FastAPI service — routers grouped by role, business logic pulled into services, raw asyncpg over an ORM, encrypted PII, Stripe billing, and a test that fails the build if any route ships without an auth dependency.',
+        icon: <GitBranch className="h-5 w-5 text-accent-400" />,
+    },
+    {
+        title: 'Currently: depth on cloud',
+        description:
+            'Knowing enough AWS to deploy is not the same as knowing it well. At SoftwareOne I work on cloud and cost optimisation, which is exactly the gap I wanted to close — the difference between getting something running and running it properly.',
+        icon: <Cloud className="h-5 w-5 text-sky-400" />,
+    },
+    {
+        title: 'Security by default',
+        description:
+            'I treat the client as untrusted: secrets live on the backend, forms are gated behind a captcha, PII is encrypted at rest. That discipline came the hard way, after an early project of mine was breached because I left API keys in frontend code.',
         icon: <Lock className="h-5 w-5 text-emerald-400" />,
-    },
-    {
-        title: 'Continuous Learning',
-        description:
-            "I strive to stay ahead of the curve by continuously exploring new tools and technologies. Every project is an opportunity for growth, whether it's diving deeper into the backend or optimizing existing workflows.",
-        icon: <GiProgression className="h-5 w-5 text-accent-400" />,
     },
 ];
 
@@ -86,16 +102,21 @@ const About = () => {
                 >
                     <p className="mb-3 font-mono text-sm text-primary-400">01 / about</p>
                     <h2 className="mb-6 font-display text-4xl font-bold tracking-tight md:text-section">
-                        Building things, then learning what I got wrong
+                        One developer, the whole stack
                     </h2>
+                    <p className="mb-4 text-lg leading-relaxed text-gray-400">
+                        I am a full-stack developer, and I mean the whole thing — frontend,
+                        backend, mobile and the infrastructure underneath. I co-founded
+                        LHBSoft and architected ReForge, a vehicle service platform, taking
+                        it from an empty repo to a revenue-generating product on web, iOS
+                        and Android.
+                    </p>
                     <p className="text-lg leading-relaxed text-gray-400">
-                        I am a full-stack developer specializing in web development.
-                        Recently I started exploring backend development and learning how to
-                        create my own servers, rather than relying on platforms such as
-                        Firebase or Vercel, which made me too focused on frontend.
-                        Currently my goal is to become a more well-rounded developer by
-                        learning how to further optimize my applications and incorporate AI
-                        in interesting and creative ways.
+                        I have since joined <span className="text-gray-200">SoftwareOne</span>{' '}
+                        to go deep on AWS and cloud cost optimisation. Cloud was the one link
+                        in that chain where I knew my depth was thinner than the rest, and I
+                        would rather fix that deliberately than work around it — the goal is
+                        to take a project from architecture to production on my own.
                     </p>
                 </m.div>
 

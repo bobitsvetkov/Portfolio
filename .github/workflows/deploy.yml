@@ -36,11 +36,6 @@ jobs:
         run: npm ci
 
       - name: Build
-        env:
-          VITE_EMAIL_JS_PUBLIC_KEY: ${{ secrets.EMAIL_JS_PUBLIC_KEY }}
-          VITE_EMAIL_JS_SERVICE_KEY: ${{ secrets.EMAIL_JS_SERVICE_KEY }}
-          VITE_EMAIL_JS_TEMPLATE_KEY: ${{ secrets.EMAIL_JS_TEMPLATE_KEY }}
-          VITE_RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
         working-directory: ./Portfolio
         run: npm run build
 

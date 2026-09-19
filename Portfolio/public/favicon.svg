@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Terminal prompt">
+  <rect width="64" height="64" rx="14" fill="#0d1017"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.25" fill="none" stroke="#2a3140" stroke-width="1.5"/>
+  <!-- ~/ prompt, matching the site's nav wordmark -->
+  <text x="32" y="42"
+        font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+        font-size="30" font-weight="700" fill="#818cf8"
+        text-anchor="middle">~/</text>
+</svg>

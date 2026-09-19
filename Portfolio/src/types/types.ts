@@ -12,13 +12,22 @@ export interface SkillGroup {
 }
 
 export interface ProjectCardProps {
+    /** Stable kebab-case id used by the terminal's `ls` and `open` commands. */
+    slug: string;
     title: string;
     description: string;
     technologies: string[];
     demoLink?: string;
-    githubLink: string;
+    /** Omitted for commercial work whose source is closed. */
+    githubLink?: string;
+    appStoreLink?: string;
+    playStoreLink?: string;
+    /** Shows a "Closed source" note in place of a repo link. */
+    privateSource?: boolean;
     image: string;
     isLegacy?: boolean;
+    /** Short line under the title, e.g. the company or context. */
+    role?: string;
     /**
      * One line on what the project actually achieved — users reached, data
      * processed, problem solved. Rendered above the description when set,

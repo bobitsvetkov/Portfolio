@@ -1,5 +1,5 @@
 import React from 'react';
-import { HistoryEntry, COMMANDS } from './Commands';
+import { HistoryEntry } from './Commands';
 
 interface TerminalHeaderProps {
   title?: string;
@@ -40,19 +40,6 @@ export const CommandPrompt = ({ value, onChange, onKeyDown, inputRef }: CommandP
       spellCheck="false"
       autoComplete="off"
     />
-  </div>
-);
-
-export const HelpCommandOutput = () => (
-  <div className="mt-2">
-    <p className="mb-2 text-green-400">Available commands:</p>
-    {Object.entries(COMMANDS).map(([cmd, info]) => (
-      <div key={cmd} className="mb-1 flex items-center space-x-2">
-        <span className="text-primary-400">{info.icon}</span>
-        <span className="text-yellow-400">{cmd}</span>
-        <span className="text-gray-500">- {info.desc}</span>
-      </div>
-    ))}
   </div>
 );
 

@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Borislav Tsvetkov — Full-Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Single-column layout on purpose: multi-column resumes frequently get
+     scrambled by ATS parsers, which read in DOM order across columns. */
+  @page { size: A4; margin: 10mm 13mm; }
+
+  :root {
+    --ink:      #14181f;
+    --muted:    #5b6472;
+    --faint:    #858d9a;
+    --accent:   #1e4d8c;
+    --rule:     #d9dee6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Inter, -apple-system, "Segoe UI", sans-serif;
+    font-size: 9.1pt;
+    line-height: 1.36;
+    color: var(--ink);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+
+  /* ---------- header ---------- */
+  header { display: flex; gap: 13px; align-items: center; margin-bottom: 10px; }
+  .photo {
+    width: 64px; height: 64px; border-radius: 50%;
+    object-fit: cover; flex-shrink: 0; border: 1px solid var(--rule);
+  }
+  h1 {
+    font-size: 19pt; font-weight: 700; letter-spacing: -0.5px;
+    line-height: 1.1; margin-bottom: 1px;
+  }
+  .role {
+    font-size: 11pt; font-weight: 500; color: var(--accent);
+    margin-bottom: 5px;
+  }
+  .contact { font-size: 8.6pt; color: var(--muted); }
+  .contact span::after { content: "  ·  "; color: var(--faint); }
+  .contact span:last-child::after { content: ""; }
+
+  /* ---------- sections ---------- */
+  section { margin-bottom: 7.5px; }
+  h2 {
+    font-size: 8.4pt; font-weight: 700; letter-spacing: 1.3px;
+    text-transform: uppercase; color: var(--accent);
+    padding-bottom: 2px; margin-bottom: 5px;
+    border-bottom: 1.2px solid var(--rule);
+  }
+
+  .summary { color: #2b323c; }
+
+  /* ---------- entries ---------- */
+  .entry { margin-bottom: 6.5px; break-inside: avoid; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry-head {
+    display: flex; justify-content: space-between;
+    align-items: baseline; gap: 12px;
+  }
+  .entry-title { font-weight: 600; font-size: 9.6pt; }
+  .entry-org { font-weight: 500; color: var(--accent); }
+  .entry-meta {
+    font-size: 8.4pt; color: var(--muted);
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .entry-sub { font-size: 8.6pt; color: var(--muted); margin-bottom: 3px; }
+
+  /* Plain list markers, deliberately. Absolutely-positioned custom bullets
+     put each <li> in its own paint layer, which makes Chromium emit the text
+     out of document order in the PDF content stream and scrambles ATS parsing. */
+  ul { margin-top: 2px; padding-left: 12px; list-style: disc outside; }
+  li { margin-bottom: 1.5px; color: #2b323c; }
+  li::marker { color: var(--faint); font-size: 0.8em; }
+
+  /* ---------- skills ---------- */
+  .skills { display: grid; grid-template-columns: 92px 1fr; gap: 1.5px 12px; }
+  .skills dt { font-weight: 600; color: var(--muted); font-size: 8.8pt; }
+  .skills dd { color: #2b323c; }
+
+  /* ---------- compact two-up footer blocks ---------- */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px; }
+  .mini { font-size: 8.9pt; margin-bottom: 3.5px; }
+  .mini-t { font-weight: 600; }
+  .mini-s { color: var(--muted); font-size: 8.5pt; }
+</style>
+</head>
+<body>
+
+<header>
+  <img class="photo" src="photo.jpg" alt="">
+  <div>
+    <h1>Borislav Tsvetkov</h1>
+    <div class="role">Full-Stack Developer — Backend · Mobile · Cloud</div>
+    <div class="contact">
+      <span>Sofia, Bulgaria</span>
+      <span>+359 88 274 7138</span>
+      <span>borislav.tsvetkov02@gmail.com</span>
+    </div>
+    <div class="contact">
+      <span><a href="https://bobitsvetkov.github.io/Portfolio/">bobitsvetkov.github.io/Portfolio</a></span>
+      <span><a href="https://www.linkedin.com/in/borislav-tsvetkov-818397198/">linkedin.com/in/borislav-tsvetkov</a></span>
+      <span><a href="https://github.com/bobitsvetkov">github.com/bobitsvetkov</a></span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <h2>Summary</h2>
+  <p class="summary">
+    Full-stack developer across the whole stack — frontend, backend, mobile and the
+    infrastructure underneath. Co-founded LHBSoft and architected ReForge, a SaaS platform
+    for car repair shops, from an empty repository to a revenue-generating product on web,
+    iOS and Android. Now deepening cloud expertise at SoftwareOne, working toward carrying
+    a project from architecture to production single-handedly.
+  </p>
+</section>
+
+<section>
+  <h2>Experience</h2>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div class="entry-title">
+        Fullstack Engineer &middot; <span class="entry-org">SoftwareOne</span>
+      </div>
+      <div class="entry-meta">05/2026 — Present &nbsp;·&nbsp; Sofia</div>
+    </div>
+    <ul>
+      <li>Application development in Python against REST APIs and SQL databases.</li>
+      <li>Focused on AWS and cloud cost optimisation.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div class="entry-title">
+        Co-founder &amp; Lead Engineer &middot; <span class="entry-org">LHBSoft</span>
+      </div>
+      <div class="entry-meta">09/2025 — 05/2026 &nbsp;·&nbsp; Sofia</div>
+    </div>
+    <div class="entry-sub">ReForge — SaaS platform for car repair shops, owners and mechanics · built in parallel with a full-time role at DSK Bank</div>
+    <ul>
+      <li>Architected the product from an empty repository to a revenue-generating
+          service, live on web, iOS and Android.</li>
+      <li>Designed and built the Python/FastAPI backend: 338 REST endpoints across 172
+          modules, raw asyncpg over PostgreSQL, JWT auth across six user roles,
+          AES-256-GCM encryption of personal data at rest, Stripe billing, and realtime
+          WebSocket fan-out via Postgres LISTEN/NOTIFY.</li>
+      <li>Led the migration of the API off Next.js onto a modular FastAPI service, with a
+          contract test that fails the build if any route ships without an auth dependency.</li>
+      <li>Built the Flutter mobile app end to end — 93 screens, EN/BG localisation,
+          biometric login, push notifications — and shipped it to the App Store and Google Play.</li>
+      <li>Ran the stack on AWS EC2 with Docker Compose, 445 pytest tests and Sentry
+          tracing; integrated an LLM agent with read/write tools over shop data plus
+          invoice and registration scanning with structured field extraction.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div class="entry-title">
+        Junior BAW Developer &middot; <span class="entry-org">DSK Bank</span>
+      </div>
+      <div class="entry-meta">11/2023 — 05/2026 &nbsp;·&nbsp; Sofia</div>
+    </div>
+    <ul>
+      <li>Automated business processes on IBM Business Automation Workflow, cutting manual
+          handling and customer waiting times.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div class="entry-title">
+        JavaScript Developer &middot; <span class="entry-org">Freelance</span>
+      </div>
+      <div class="entry-meta">07/2023 — 09/2023 &nbsp;·&nbsp; Sofia</div>
+    </div>
+    <ul>
+      <li>Built a site for a Twitch streamer to grow revenue and audience — donation and
+          influencer links, merchandise, embedded video and community challenges.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Selected Projects</h2>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div class="entry-title">Predict Player Performance</div>
+      <div class="entry-meta">Python · pandas · NumPy · scikit-learn · Streamlit</div>
+    </div>
+    <div class="entry-sub">Clustering and regression predicting competitive player performance; dataset gathered by a Discord bot I wrote. The interest it drew renewed player activity, producing more data to model on.</div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div class="entry-title">Thracian Noble</div>
+      <div class="entry-meta">Python · discord.py · Gemini API · Docker · pytest</div>
+    </div>
+    <div class="entry-sub">AI-assisted Discord bot serving game statistics, recommendations and moderation to a gaming community.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Technical Skills</h2>
+  <dl class="skills">
+    <dt>Languages</dt>      <dd>Python, TypeScript, JavaScript, Dart, SQL</dd>
+    <dt>Backend</dt>        <dd>FastAPI, REST API design, Pydantic, asyncpg, PostgreSQL, WebSockets, Stripe</dd>
+    <dt>Mobile</dt>         <dd>Flutter, Firebase Cloud Messaging, App Store &amp; Google Play releases</dd>
+    <dt>Frontend</dt>       <dd>React, Next.js, Tailwind CSS</dd>
+    <dt>Cloud &amp; DevOps</dt> <dd>AWS (EC2, cost optimisation), Docker, Linux, CI/CD, Sentry</dd>
+    <dt>Testing</dt>        <dd>pytest, unit and integration testing</dd>
+    <dt>Data &amp; AI</dt>  <dd>pandas, NumPy, scikit-learn, LLM tool-calling agents</dd>
+  </dl>
+</section>
+
+<div class="cols">
+  <section>
+    <h2>Education</h2>
+    <div class="mini">
+      <div class="mini-t">Alpha JavaScript Track</div>
+      <div class="mini-s">Telerik Academy · 01/2023 — 06/2023</div>
+    </div>
+    <div class="mini">
+      <div class="mini-t">B.Sc. German Language and Literature</div>
+      <div class="mini-s">New Bulgarian University · 2017 — present</div>
+    </div>
+    <div class="mini">
+      <div class="mini-t">Industrial Electronics</div>
+      <div class="mini-s">VHS of Electronics “John Atanasov” · 2013 — 2017</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Certifications &amp; Languages</h2>
+    <div class="mini">
+      <div class="mini-t">Meta Front-End Developer</div>
+      <div class="mini-s">Coursera</div>
+    </div>
+    <div class="mini">
+      <div class="mini-t">Technical Support Fundamentals</div>
+      <div class="mini-s">Coursera</div>
+    </div>
+    <div class="mini">
+      <div class="mini-t">English — Proficient &nbsp;·&nbsp; German — Intermediate</div>
+    </div>
+  </section>
+</div>
+
+</body>
+</html>

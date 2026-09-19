@@ -7,10 +7,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "assets": "node tools/render.mjs"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
     "lucide-react": "^0.468.0",
     "motion": "^13.4.0",
     "react": "^19.3.0",

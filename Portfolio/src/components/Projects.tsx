@@ -1,61 +1,7 @@
 import React from 'react';
 import { m } from 'motion/react';
 import { ProjectCard } from './ProjectCard';
-import TotalWarWebsiteImage from "../assets/total-war-hub.webp"
-import DiscordBotImage from "../assets/thracian-noble.webp"
-import FloorTechsImage from "../assets/floor-techs.webp"
-import RandomGeneratorImage from "../assets/rome-2-matchup-generator.webp"
-import PredictPerformanceImage from "../assets/predict-player-performance.webp"
-import { ProjectCardProps } from '../types/types';
-
-// `outcome` is optional and intentionally unset — add one line per project
-// (users reached, rows processed, problem solved) and the card renders it.
-const projects: ProjectCardProps[] = [
-    {
-        title: "Predict Player Performance",
-        description: "A web application that predicts player performance using clustering and regression techniques. I used my Discord bot to gather the data behind the dataset.",
-        technologies: ["Python", "Streamlit", "Pandas", "NumPy", "Scikit-learn", "json"],
-        demoLink: "https://predict-player-performance.streamlit.app/",
-        githubLink: "https://github.com/bobitsvetkov/Predict-Player-Performance",
-        image: PredictPerformanceImage,
-        featured: true,
-    },
-    {
-        title: "Rome 2 Matchup Generator",
-        description: "A web application that generates random faction matchups for Total War: Rome 2.",
-        technologies: ["Typescript", "React", "json"],
-        demoLink: "https://bobitsvetkov.github.io/Rome-2-Random-Matchup-Generator/",
-        githubLink: "https://github.com/bobitsvetkov/Rome-2-Random-Matchup-Generator",
-        image: RandomGeneratorImage,
-    }
-];
-
-const legacyProjects: ProjectCardProps[] = [
-    {
-        title: "Total War Community Hub",
-        description: "Comprehensive platform for Total War gamers to connect, compete, and strategize.",
-        technologies: ["React", "Tailwind", "Firebase", "Google Gemini API", "Typescript", "ChakraUI", "Vercel"],
-        githubLink: "https://github.com/bobitsvetkov/tw-website",
-        image: TotalWarWebsiteImage,
-        isLegacy: true,
-    },
-    {
-        title: "Thracian Noble",
-        description: "AI-powered Discord bot providing game stats, recommendations, and community management.",
-        technologies: ["Python", "Discord.py", "Google Gemini API", "pytest", "Docker", "Youtube API", "json"],
-        githubLink: "https://github.com/bobitsvetkov/Total-War-Bot",
-        image: DiscordBotImage,
-        isLegacy: true,
-    },
-    {
-        title: "Floor-techs",
-        description: "A website for a flooring company, showcasing their services and portfolio.",
-        technologies: ["React", "Typescript", "Emailjs", "Tailwind", "Recaptcha", "Vercel"],
-        githubLink: "https://github.com/bobitsvetkov/floortechs-website",
-        image: FloorTechsImage,
-        isLegacy: true,
-    }
-];
+import { projects, legacyProjects } from '../data/projects';
 
 const Projects: React.FC = () => {
     return (
@@ -86,7 +32,7 @@ const Projects: React.FC = () => {
                     </p>
                 </m.div>
 
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                     {projects.map((project, index) => (
                         <m.div
                             key={project.title}

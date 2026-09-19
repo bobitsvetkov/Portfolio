@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OG card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  /* Rendered at exactly 1200x630 — the size LinkedIn, Slack and X expect. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --surface-0: #08090c;
+    --line:      #2a3140;
+    --primary-300: #a5b4fc;
+    --primary-400: #818cf8;
+    --accent-400:  #a78bfa;
+  }
+
+  body {
+    width: 1200px; height: 630px;
+    background: var(--surface-0);
+    color: #e8eaf0;
+    font-family: Inter, system-ui, sans-serif;
+    position: relative;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 0 76px;
+  }
+
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse at 28% 45%, black 12%, transparent 72%);
+            mask-image: radial-gradient(ellipse at 28% 45%, black 12%, transparent 72%);
+  }
+  .glow {
+    position: absolute; left: -140px; top: -180px;
+    width: 780px; height: 620px; border-radius: 50%;
+    background: rgb(79 70 229 / 0.20); filter: blur(120px);
+  }
+
+  .inner { position: relative; }
+
+  .prompt {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 21px; color: var(--primary-400);
+    margin-bottom: 22px; letter-spacing: 0.5px;
+  }
+
+  h1 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 78px; font-weight: 700;
+    letter-spacing: -2.4px; line-height: 1.02;
+    margin-bottom: 18px;
+  }
+  h1 .grad {
+    background-image: linear-gradient(100deg, var(--primary-300), var(--accent-400));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  .role { font-size: 27px; color: #9aa3b2; margin-bottom: 34px; letter-spacing: -0.3px; }
+
+  .chips { display: flex; gap: 9px; flex-wrap: wrap; max-width: 940px; }
+  .chip {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 17px; color: #aeb6c4;
+    border: 1px solid var(--line); background: #181d28;
+    border-radius: 9px; padding: 8px 15px;
+  }
+
+  .foot {
+    position: absolute; left: 76px; right: 76px; bottom: 44px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: "JetBrains Mono", monospace; font-size: 18px; color: #6b7482;
+    border-top: 1px solid var(--line); padding-top: 22px;
+  }
+  .foot .site { color: #9aa3b2; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="glow"></div>
+
+  <div class="inner">
+    <div class="prompt">$ whoami</div>
+    <h1>Borislav <span class="grad">Tsvetkov</span></h1>
+    <div class="role">Full-stack developer — backend, mobile and the infrastructure underneath.</div>
+    <div class="chips">
+      <span class="chip">Python</span>
+      <span class="chip">FastAPI</span>
+      <span class="chip">PostgreSQL</span>
+      <span class="chip">Flutter</span>
+      <span class="chip">TypeScript</span>
+      <span class="chip">Docker</span>
+      <span class="chip">AWS</span>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="site">bobitsvetkov.github.io/Portfolio</span>
+    <span>Architected ReForge · zero to revenue</span>
+  </div>
+</body>
+</html>

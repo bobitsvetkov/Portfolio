@@ -4,8 +4,8 @@ import Terminal from './Terminal/Terminal';
 
 const INTRODUCTION = [
     "Fullstack Developer",
-    "AI Enthusiast",
-    "IBM BPM Developer",
+    "Frontend · Backend · Mobile · DevOps",
+    "Going deep on AWS",
     "Passionate Gamer"
 ];
 
