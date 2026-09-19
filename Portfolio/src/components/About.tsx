@@ -125,74 +125,77 @@ const About = () => {
                     </p>
                 </m.div>
 
-                <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
-                    <m.div
-                        initial={{ opacity: 0, y: 24 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.2 }}
-                        transition={{ duration: 0.5 }}
-                        className="rounded-2xl border border-surface-line bg-surface-3 p-8 lg:col-span-2"
-                    >
-                        <h3 className="mb-8 flex items-center font-display text-xl font-semibold">
-                            <Database className="mr-3 h-5 w-5 text-primary-400" />
-                            Technical Skills
-                        </h3>
+                {/* Skills run full width: chips flow horizontally, so a narrow
+                    column left ~220px of dead space beside the taller prose card. */}
+                <m.div
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.5 }}
+                    className="mb-8 rounded-2xl border border-surface-line bg-surface-3 p-8"
+                >
+                    <h3 className="mb-7 flex items-center font-display text-xl font-semibold">
+                        <Database className="mr-3 h-5 w-5 text-primary-400" />
+                        Technical Skills
+                    </h3>
 
-                        <div className="space-y-7">
-                            {skillGroups.map((group) => (
-                                <div key={group.tier}>
-                                    <div className="mb-3">
-                                        <h4 className="font-mono text-xs uppercase tracking-widest text-primary-400">
-                                            {group.tier}
-                                        </h4>
-                                        <p className="mt-1 text-sm text-gray-500">{group.blurb}</p>
-                                    </div>
-                                    <ul className="flex flex-wrap gap-2">
-                                        {group.skills.map((skill) => (
-                                            <li
-                                                key={skill.name}
-                                                className="flex items-center gap-2 rounded-lg border border-surface-line bg-surface-4 px-3 py-1.5 text-sm text-gray-200"
-                                            >
-                                                <span className="text-gray-400">{skill.icon}</span>
-                                                {skill.name}
-                                            </li>
-                                        ))}
-                                    </ul>
+                    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                        {skillGroups.map((group) => (
+                            <div key={group.tier}>
+                                <div className="mb-3 border-l-2 border-primary-500/40 pl-3">
+                                    <h4 className="font-mono text-xs uppercase tracking-widest text-primary-400">
+                                        {group.tier}
+                                    </h4>
+                                    <p className="mt-1 text-sm text-gray-500">{group.blurb}</p>
                                 </div>
-                            ))}
-                        </div>
-                    </m.div>
+                                <ul className="flex flex-wrap gap-2">
+                                    {group.skills.map((skill) => (
+                                        <li
+                                            key={skill.name}
+                                            className="flex items-center gap-2 rounded-lg border border-surface-line bg-surface-4 px-3 py-1.5 text-sm text-gray-200"
+                                        >
+                                            <span className="text-gray-400">{skill.icon}</span>
+                                            {skill.name}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                </m.div>
 
-                    <m.div
-                        initial={{ opacity: 0, y: 24 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.2 }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                        className="rounded-2xl border border-surface-line bg-surface-3 p-8 lg:col-span-3"
-                    >
-                        <h3 className="mb-8 flex items-center font-display text-xl font-semibold">
-                            <Brain className="mr-3 h-5 w-5 text-primary-400" />
-                            How I Work
-                        </h3>
-                        <ul className="space-y-5">
-                            {philosophy.map((approach) => (
-                                <li
-                                    key={approach.title}
-                                    className="flex items-start gap-4 rounded-xl border border-transparent bg-surface-4/50 p-5 transition-colors hover:border-surface-line"
-                                >
-                                    <div className="mt-0.5 shrink-0">{approach.icon}</div>
-                                    <div>
-                                        <h4 className="mb-1.5 font-semibold text-white">
-                                            {approach.title}
-                                        </h4>
-                                        <p className="text-sm leading-relaxed text-gray-400">
-                                            {approach.description}
-                                        </p>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                    </m.div>
+                <m.h3
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.4 }}
+                    className="mb-5 flex items-center font-display text-xl font-semibold"
+                >
+                    <Brain className="mr-3 h-5 w-5 text-primary-400" />
+                    How I Work
+                </m.h3>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                    {philosophy.map((approach, index) => (
+                        <m.div
+                            key={approach.title}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.15 }}
+                            transition={{ duration: 0.45, delay: (index % 2) * 0.08 }}
+                            className="flex items-start gap-4 rounded-2xl border border-surface-line bg-surface-3 p-6 transition-colors hover:border-primary-500/40"
+                        >
+                            <div className="mt-0.5 shrink-0">{approach.icon}</div>
+                            <div>
+                                <h4 className="mb-1.5 font-semibold text-white">
+                                    {approach.title}
+                                </h4>
+                                <p className="text-sm leading-relaxed text-gray-400">
+                                    {approach.description}
+                                </p>
+                            </div>
+                        </m.div>
+                    ))}
                 </div>
             </div>
         </section>
